@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#4f46e5">
+<title>ثبتینو | خدمات ثبتی، کپی و چاپ</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪪</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ================= تم‌ها ================= */
+:root{
+  --bg:#eef1f8;--card:#ffffff;--text:#1e293b;--muted:#64748b;--tiny:#94a3b8;
+  --border:#e2e8f0;--input:#f8fafc;--soft:#f1f5f9;--glass:rgba(255,255,255,.92);
+  --primary:#4f46e5;--primary2:#7c3aed;--primary-soft:#eef2ff;
+  --shadow:0 3px 16px rgba(15,23,42,.06);--shadow-lg:0 8px 30px rgba(15,23,42,.14);
+}
+body[data-theme="dark"]{
+  --bg:#0a1120;--card:#121b2e;--text:#e6ecf7;--muted:#94a4c3;--tiny:#6b7a99;
+  --border:#233252;--input:#0d1628;--soft:#18233c;--glass:rgba(15,23,42,.92);
+  --shadow:0 3px 16px rgba(0,0,0,.35);--shadow-lg:0 8px 30px rgba(0,0,0,.5);
+}
+body[data-accent="violet"]{--primary:#4f46e5;--primary2:#7c3aed;--primary-soft:#eef2ff}
+body[data-accent="blue"]{--primary:#2563eb;--primary2:#0891b2;--primary-soft:#eff6ff}
+body[data-accent="green"]{--primary:#059669;--primary2:#0d9488;--primary-soft:#ecfdf5}
+body[data-accent="orange"]{--primary:#ea580c;--primary2:#d97706;--primary-soft:#fff7ed}
+body[data-theme="dark"][data-accent="violet"]{--primary:#6d6ff5;--primary2:#9b6cf8;--primary-soft:#1f2547}
+body[data-theme="dark"][data-accent="blue"]{--primary:#4f8bfa;--primary2:#0ea5c9;--primary-soft:#14243f}
+body[data-theme="dark"][data-accent="green"]{--primary:#17b78c;--primary2:#16b3ab;--primary-soft:#0f2c28}
+body[data-theme="dark"][data-accent="orange"]{--primary:#fb8432;--primary2:#efa11c;--primary-soft:#2e2214}
+
+/* ================= پایه ================= */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'Vazirmatn',Tahoma,'Segoe UI',sans-serif;
+  background:#0c1022;
+  background-image:radial-gradient(1200px 600px at 70% -10%,#2c2a6e 0%,transparent 60%),radial-gradient(900px 500px at 10% 110%,#1a1840 0%,transparent 55%);
+  color:var(--text);font-size:14px;line-height:1.7;direction:rtl;
+  display:flex;align-items:center;justify-content:center;min-height:100vh;padding:14px;
+}
+button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
+input,textarea,select{font-family:inherit;font-size:14px;color:var(--text);outline:none}
+input::placeholder,textarea::placeholder{color:var(--tiny)}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:6px}
+::-webkit-scrollbar{width:0;height:0}
+svg{display:block}
+
+/* ================= قاب گوشی ================= */
+.stage{display:flex;flex-direction:column;align-items:center;gap:10px}
+.phone{
+  position:relative;width:min(430px,calc(100vw - 24px));height:min(890px,calc(100vh - 60px));
+  min-height:560px;background:var(--bg);border-radius:38px;border:9px solid #0b0f1a;
+  box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px #1e293b, inset 0 0 0 1px rgba(255,255,255,.06);
+  overflow:hidden;transition:background .3s;
+}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:24px;background:#0b0f1a;border-radius:0 0 16px 16px;z-index:60}
+#view{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;scroll-behavior:smooth}
+#view.hasTab{padding-bottom:86px}
+#tabbar{position:absolute;bottom:8px;left:10px;right:10px;height:62px;background:var(--glass);backdrop-filter:blur(14px);border-radius:20px;box-shadow:var(--shadow-lg);display:flex;z-index:50}
+#tabbar .tb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--tiny);font-size:10px;font-weight:600;position:relative;transition:.2s}
+#tabbar .tb svg{width:21px;height:21px}
+#tabbar .tb.on{color:var(--primary)}
+#tabbar .tb.on::before{content:'';position:absolute;top:6px;width:26px;height:3px;border-radius:3px;background:var(--primary)}
+#tabbar .tb .bdg{position:absolute;top:8px;left:calc(50% - 2px);background:#ef4444;color:#fff;font-size:9px;min-width:15px;height:15px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-weight:800}
+.desktop-hint{color:#94a3b8;font-size:11.5px;text-align:center;letter-spacing:.2px}
+.desktop-hint b{color:#c7d2fe}
+@media(max-width:520px){body{padding:0}.phone{width:100vw;height:100vh;min-height:100vh;border:none;border-radius:0}.notch{display:none}.desktop-hint{display:none}}
+
+/* ================= سربرگ‌ها ================= */
+.hh{background:linear-gradient(135deg,var(--primary),var(--primary2) 70%);color:#fff;padding:34px 16px 70px;border-radius:0 0 28px 28px;position:relative;margin-bottom:-50px;overflow:hidden}
+.hh::after{content:'';position:absolute;inset:0;background:radial-gradient(340px 150px at 82% 0%,rgba(255,255,255,.16),transparent 70%);pointer-events:none}
+.hh-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;position:relative;z-index:1}
+.avatar{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;border:1.5px solid rgba(255,255,255,.35)}
+.hbell{position:relative;width:40px;height:40px;border-radius:13px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(255,255,255,.2)}
+.hbell svg{width:19px;height:19px}
+.hbell .bdg{position:absolute;top:-4px;left:-4px;background:#f59e0b;color:#1e293b;font-size:10px;min-width:17px;height:17px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;padding:0 4px}
+.hbell .bdg.hide{display:none}
+.hh-greet{font-size:12px;opacity:.85}
+.hh-name{font-size:18px;font-weight:800;margin-bottom:12px;position:relative;z-index:1}
+.hh-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;position:relative;z-index:1}
+.hchip{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:18px;padding:9px 6px;min-height:68px;backdrop-filter:blur(10px);color:#fff;text-align:center;overflow:hidden;transition:.15s}
+.hchip:active{transform:scale(.96)}
+.hchip .hc-em{font-size:19px;line-height:1.2}
+.hchip .hc-l{font-size:9.5px;opacity:.85;font-weight:600}
+.hchip .hc-v{font-size:13.5px;font-weight:900;white-space:nowrap}
+.hchip.glass{background:rgba(255,255,255,.09);backdrop-filter:blur(16px);border-color:rgba(255,255,255,.4)}
+.hchip.glass::after{content:'';position:absolute;top:-30%;bottom:-30%;width:36%;left:-48%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite}
+.hchip.pack{background:rgba(251,191,36,.24);border-color:rgba(251,191,36,.45)}
+@keyframes shine{0%{left:-48%}44%{left:140%}100%{left:140%}}
+.page-h{position:sticky;top:0;z-index:40;background:var(--glass);backdrop-filter:blur(10px);display:flex;align-items:center;gap:10px;padding:14px 16px 10px}
+.page-h .ttl{font-size:16.5px;font-weight:800}
+.page-h .sp{flex:1}
+.hback{width:36px;height:36px;border-radius:12px;background:var(--card);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+.hback svg{width:18px;height:18px;transform:rotate(180deg)}
+
+/* ================= اجزای چیدمان ================= */
+.pad{padding:0 16px 24px}
+.card{background:var(--card);border-radius:18px;padding:14px;box-shadow:var(--shadow);margin-bottom:12px}
+.card-t{font-size:13.5px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.card-t .sp{flex:1}
+.sect-t{display:flex;align-items:center;justify-content:space-between;margin:16px 2px 10px;font-size:13.5px;font-weight:800}
+.sect-t .more{font-size:11px;color:var(--primary);font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.row{display:flex;align-items:center;gap:8px}
+.sp{flex:1}
+.muted{color:var(--muted);font-size:12px}
+.tiny{font-size:11px;color:var(--tiny)}
+.bold{font-weight:800}
+.center{text-align:center}
+.mt6{margin-top:6px}.mt10{margin-top:10px}.mt14{margin-top:14px}.mb10{margin-bottom:10px}
+.green{color:#059669}.red{color:#dc2626}.amber{color:#d97706}.indigo{color:var(--primary)}
+
+/* جستجو و فیلترها */
+.search{display:flex;align-items:center;gap:8px;background:var(--card);border-radius:14px;padding:10px 14px;box-shadow:var(--shadow);margin:12px 0}
+.search svg{width:17px;height:17px;color:var(--tiny);flex:1 0 auto}
+.search input{border:none;background:none;flex:1;color:var(--text)}
+.chips{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;margin-bottom:12px}
+.chip{white-space:nowrap;background:var(--card);border:1.5px solid var(--border);color:var(--muted);border-radius:20px;padding:6px 13px;font-size:12px;font-weight:700;transition:.15s}
+.chip.on{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(15,23,42,.18)}
+
+/* بنرها */
+.banners{display:flex;gap:10px;overflow-x:auto;padding:2px;margin:14px 0 4px;scroll-snap-type:x mandatory}
+.banner{min-width:82%;scroll-snap-align:center;border-radius:18px;padding:14px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:88px;position:relative;overflow:hidden;text-align:right}
+.banner .b-em{position:absolute;left:10px;top:8px;font-size:44px;opacity:.9}
+.banner .b-t{font-weight:800;font-size:14px}
+.banner .b-d{font-size:11px;opacity:.85}
+.banner .b-cta{font-size:11px;font-weight:800;background:rgba(255,255,255,.2);border-radius:16px;padding:4px 10px;align-self:flex-start;margin-top:6px}
+.bn1{background:linear-gradient(120deg,#f59e0b,#ef4444)}
+.bn2{background:linear-gradient(120deg,#059669,#0d9488)}
+.bn3{background:linear-gradient(120deg,var(--primary),var(--primary2))}
+
+/* شبکه خدمات */
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.svc{background:var(--card);border-radius:18px;padding:12px;box-shadow:var(--shadow);position:relative;transition:.15s;border:1.5px solid transparent}
+.svc:active{transform:scale(.97)}
+.svc .s-em{width:42px;height:42px;border-radius:13px;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:8px}
+.svc .s-n{font-weight:800;font-size:12.5px;line-height:1.5;min-height:36px}
+.svc .s-p{font-size:12px;color:var(--primary);font-weight:800;margin-top:4px}
+.svc .s-b{position:absolute;top:10px;left:10px;font-size:9px;font-weight:800;padding:3px 8px;border-radius:10px}
+.b-remote{background:#dcfce7;color:#15803d}
+.b-onsite{background:#fef3c7;color:#b45309}
+.svc-more{background:var(--soft);border:1.5px dashed var(--border);border-radius:18px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;font-weight:700;min-height:130px}
+
+/* دکمه‌ها */
+.btn{display:flex;align-items:center;justify-content:center;gap:7px;border-radius:14px;padding:12px 16px;font-size:14px;font-weight:800;width:100%;transition:.15s}
+.btn:active{transform:scale(.97)}
+.btn-p{background:linear-gradient(120deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 6px 18px rgba(15,23,42,.22)}
+.btn-g{background:linear-gradient(120deg,#059669,#10b981);color:#fff;box-shadow:0 6px 18px rgba(15,23,42,.2)}
+.btn-o{background:var(--card);border:1.5px solid var(--border);color:var(--text)}
+.btn-d{background:transparent;border:1.5px solid #fca5a5;color:#dc2626}
+.btn-s{width:auto;padding:8px 14px;font-size:12px;border-radius:12px}
+.btn:disabled{opacity:.45;pointer-events:none}
+
+/* فیلدها */
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px}
+.field input,.field textarea,.field select{width:100%;background:var(--input);border:1.5px solid var(--border);border-radius:13px;padding:11px 13px;transition:.15s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--primary);background:var(--card)}
+.field textarea{min-height:74px;resize:vertical}
+.field .hint{font-size:10.5px;color:var(--tiny);margin-top:4px}
+.filebox{border:1.5px dashed var(--primary);background:var(--primary-soft);border-radius:13px;padding:14px;text-align:center;color:var(--primary);font-size:12.5px;font-weight:700;display:block;cursor:pointer}
+.filebox input{display:none}
+
+/* خلاصه قیمت و پرداخت */
+.sumbox{background:var(--soft);border:1.5px solid var(--border);border-radius:16px;padding:12px;font-size:13px}
+.sumrow{display:flex;justify-content:space-between;padding:4px 0;gap:10px}
+.sumrow.total{border-top:1.5px dashed var(--border);margin-top:6px;padding-top:10px;font-weight:800;font-size:14px}
+.payopt{display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:15px;padding:12px;margin-bottom:9px;transition:.15s;font-weight:700;font-size:13px;cursor:pointer;background:var(--card)}
+.payopt.on{border-color:var(--primary);background:var(--primary-soft)}
+.payopt .em{font-size:22px}
+.payopt small{display:block;font-weight:500;font-size:11px;color:var(--muted)}
+.radio-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex:0 0 auto;position:relative}
+.payopt.on .radio-dot{border-color:var(--primary)}
+.payopt.on .radio-dot::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--primary)}
+.bankcard{background:linear-gradient(130deg,#101828,#1e293b);color:#fff;border-radius:18px;padding:15px;position:relative;overflow:hidden;margin-bottom:12px}
+.bankcard .bk-row{display:flex;justify-content:space-between;font-size:10.5px;opacity:.8}
+.bankcard .bk-no{font-size:17px;font-weight:800;letter-spacing:4px;direction:ltr;text-align:center;margin:10px 0 6px}
+.bankcard .bk-h{font-size:11px;opacity:.85;text-align:center}
+
+/* نشان وضعیت */
+.stb{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:11px;display:inline-flex;align-items:center;gap:4px}
+.st-submitted{background:#e0f2fe;color:#0369a1}
+.st-in_review{background:#fef3c7;color:#b45309}
+.st-in_progress{background:#ede9fe;color:#6d28d9}
+.st-ready{background:#dcfce7;color:#15803d}
+.st-delivered{background:#d1fae5;color:#047857}
+.st-booked{background:#e0f2fe;color:#0369a1}
+.st-attended{background:#d1fae5;color:#047857}
+.st-cancelled{background:#fee2e2;color:#b91c1c}
+.st-rejected{background:#fee2e2;color:#b91c1c}
+
+/* کارت سفارش */
+.ord{background:var(--card);border-radius:18px;padding:13px;box-shadow:var(--shadow);margin-bottom:10px;display:flex;gap:11px;align-items:center}
+.ord .o-em{width:46px;height:46px;border-radius:14px;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:23px;flex:0 0 auto}
+.ord .o-n{font-weight:800;font-size:13px}
+.ord .o-m{font-size:11px;color:var(--muted)}
+
+/* تایم‌لاین */
+.tl{padding:4px 2px 4px 0}
+.tl-item{position:relative;padding:0 30px 20px 0}
+.tl-item::before{content:'';position:absolute;right:7px;top:18px;bottom:-2px;width:2.5px;background:var(--border);border-radius:2px}
+.tl-item:last-child::before{display:none}
+.tl-dot{position:absolute;right:0;top:2px;width:17px;height:17px;border-radius:50%;background:var(--border);border:3px solid var(--bg)}
+.tl-item.done .tl-dot{background:#10b981;box-shadow:0 0 0 4px rgba(16,185,129,.18)}
+.tl-item.cur .tl-dot{background:var(--primary);box-shadow:0 0 0 4px var(--primary-soft);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(99,102,241,.4)}70%{box-shadow:0 0 0 9px rgba(99,102,241,0)}100%{box-shadow:0 0 0 0 rgba(99,102,241,0)}}
+.tl-item .t-n{font-weight:800;font-size:13px;color:var(--tiny)}
+.tl-item.done .t-n,.tl-item.cur .t-n{color:var(--text)}
+.tl-item .t-d{font-size:10.5px;color:var(--tiny)}
+
+/* کیف پول */
+.wallet-card{background:linear-gradient(130deg,var(--primary),var(--primary2) 75%);color:#fff;border-radius:22px;padding:18px;position:relative;overflow:hidden;margin-bottom:12px}
+.wallet-card .wc-bg{position:absolute;left:-30px;top:-30px;font-size:120px;opacity:.09}
+.wallet-card .wc-l{font-size:11.5px;opacity:.8}
+.wallet-card .wc-v{font-size:26px;font-weight:900;margin:4px 0 10px}
+.tx{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.tx:last-child{border:none;padding-bottom:0}
+.tx .t-em{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;flex:0 0 auto}
+.tx .t-n{font-size:12.5px;font-weight:700}
+.tx .t-d{font-size:10px;color:var(--tiny)}
+.tx .t-a{font-size:12.5px;font-weight:800;text-align:left}
+
+/* تب‌ها */
+.tabs{display:flex;background:var(--soft);border-radius:14px;padding:4px;margin-bottom:14px}
+.tabs .tab{flex:1;text-align:center;padding:8px;border-radius:11px;font-size:12.5px;font-weight:800;color:var(--muted);transition:.15s}
+.tabs .tab.on{background:var(--card);color:var(--primary);box-shadow:0 2px 8px rgba(15,23,42,.1)}
+
+/* ================= گردونه شانس ================= */
+.wheel-wrap{position:relative;width:312px;height:312px;margin:24px auto 10px}
+.wheel-bulbs{position:absolute;inset:0;pointer-events:none;z-index:3}
+.wheel-bulbs span{position:absolute;top:50%;left:50%;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:#fde68a;box-shadow:0 0 8px 2px rgba(251,191,36,.6)}
+.wheel-bulbs span:nth-child(odd){animation:twinkle 1.7s infinite}
+.wheel-bulbs span:nth-child(even){animation:twinkle 1.7s .85s infinite}
+@keyframes twinkle{0%,100%{opacity:1;box-shadow:0 0 8px 2px rgba(251,191,36,.6)}50%{opacity:.35;box-shadow:0 0 3px 1px rgba(251,191,36,.25)}}
+.wheel{position:absolute;inset:15px;width:auto;height:auto;border-radius:50%;box-shadow:0 14px 44px rgba(0,0,0,.4),0 0 0 7px #fff,0 0 0 9px var(--border);transition:transform 4.4s cubic-bezier(.1,.68,.06,1)}
+.wseg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.wseg span{position:absolute;font-size:12px;font-weight:900;color:#fff;text-shadow:0 1.5px 3px rgba(0,0,0,.4);white-space:nowrap}
+.wseps{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(rgba(255,255,255,.3) 0deg 1.1deg,transparent 1.1deg 45deg);pointer-events:none}
+.wheel-deep{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.3),transparent 50%),radial-gradient(circle at 72% 82%,rgba(0,0,0,.22),transparent 55%);pointer-events:none}
+.wheel-pointer{position:absolute;top:-17px;left:50%;transform:translateX(-50%);z-index:6;filter:drop-shadow(0 4px 7px rgba(0,0,0,.35))}
+.wheel-hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff8db,#fbbf24 52%,#d97706);border:4px solid #fff;color:#7c2d12;font-size:14.5px;font-weight:900;z-index:4;box-shadow:0 7px 18px rgba(0,0,0,.35),inset 0 2px 8px rgba(255,255,255,.55),inset 0 -3px 6px rgba(120,53,15,.3)}
+.wheel-hub:disabled{opacity:.75}
+.wheel-hint{text-align:center;font-size:11.5px;color:var(--muted);margin-bottom:14px}
+
+/* ================= بازی کارت‌ها ================= */
+.rar-common{--rc:#64748b}.rar-rare{--rc:#0284c7}.rar-epic{--rc:#7c3aed}.rar-legendary{--rc:#d97706}
+.album{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ccell{aspect-ratio:3/4.1;border-radius:13px;border:2px solid var(--border);background:var(--soft);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9.5px;font-weight:700;color:var(--tiny);position:relative;overflow:hidden;padding:3px;text-align:center}
+.ccell .c-em{font-size:24px}
+.ccell.owned{background:var(--card);border-color:var(--rc,#64748b);color:var(--text);box-shadow:0 3px 10px rgba(15,23,42,.1)}
+.ccell.owned .c-em{font-size:26px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.15))}
+.ccell .c-r{font-size:8px;color:var(--rc,#64748b);font-weight:800}
+.ccell .dup{position:absolute;top:2px;left:2px;font-size:9px}
+.act{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;padding:12px;box-shadow:var(--shadow);margin-bottom:9px}
+.act .a-em{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;flex:0 0 auto}
+.act .a-n{font-weight:800;font-size:13px}
+.act .a-d{font-size:11px;color:var(--muted)}
+.act.done{opacity:.62}
+.act .a-chk{width:26px;height:26px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:#dcfce7;color:#16a34a;flex:0 0 auto}
+.pack-big{font-size:84px;text-align:center;animation:bounce 1.4s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-9px) scale(1.04)}}
+.creveal{text-align:center;animation:flipIn .55s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes flipIn{0%{transform:rotateY(90deg) scale(.6);opacity:0}100%{transform:rotateY(0) scale(1);opacity:1}}
+.bigcard{width:168px;height:224px;margin:10px auto;border-radius:18px;background:linear-gradient(160deg,var(--card),var(--soft));border:3px solid var(--rc,#64748b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 10px 30px rgba(15,23,42,.2);position:relative;overflow:hidden}
+.bigcard .bc-em{font-size:58px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.18))}
+.bigcard .bc-n{font-weight:900;font-size:15px}
+.bigcard .bc-r{font-size:11px;font-weight:800;color:var(--rc,#64748b)}
+.bigcard.legendary::after{content:'';position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent 0 70%,#fbbf24aa 85%,transparent 100%);animation:spinsh 3s linear infinite}
+@keyframes spinsh{to{transform:rotate(360deg)}}
+.setbar{height:7px;border-radius:4px;background:var(--border);overflow:hidden;flex:1}
+.setbar i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:4px}
+
+/* ================= تقویم و ساعت‌ها ================= */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cday{border:1.5px solid var(--border);background:var(--soft);border-radius:12px;padding:8px 2px;text-align:center;cursor:pointer;transition:.15s}
+.cday .cd-n{font-size:10px;color:var(--muted);font-weight:700}
+.cday .cd-d{font-size:14px;font-weight:900;color:var(--text)}
+.cday.on{background:var(--primary);border-color:var(--primary)}
+.cday.on .cd-n,.cday.on .cd-d{color:#fff}
+.cday:active{transform:scale(.95)}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.slot{border:1.5px solid var(--border);background:var(--soft);border-radius:12px;padding:9px;text-align:center;font-weight:800;font-size:13px;cursor:pointer;transition:.15s;color:var(--text)}
+.slot.on{background:var(--primary);border-color:var(--primary);color:#fff}
+.slot.taken{opacity:.4;pointer-events:none;text-decoration:line-through;background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.35)}
+
+/* ================= پنل مدیر ================= */
+.stat{background:var(--card);border-radius:18px;padding:13px;box-shadow:var(--shadow)}
+.stat .st-l{font-size:11px;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:5px}
+.stat .st-v{font-size:17px;font-weight:900;margin-top:3px}
+.stat .st-s{font-size:10px;margin-top:2px;font-weight:700}
+.stat .ic{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.bars{display:flex;align-items:flex-end;gap:7px;height:132px;padding-top:20px}
+.bar-col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.bar{background:linear-gradient(180deg,var(--primary2),var(--primary));border-radius:7px 7px 0 0;position:relative;min-height:4px;transition:.3s}
+.bar b{position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:9px;color:var(--primary);white-space:nowrap}
+.bar-lbl{text-align:center;font-size:9.5px;color:var(--muted);margin-top:5px;font-weight:700}
+.donut-wrap{display:flex;align-items:center;gap:14px}
+.donut{width:118px;height:118px;border-radius:50%;position:relative;flex:0 0 auto}
+.donut::after{content:'';position:absolute;inset:25px;background:var(--card);border-radius:50%}
+.donut-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;font-size:10px}
+.donut-c b{font-size:13px}
+.legend{font-size:11.5px;display:flex;flex-direction:column;gap:6px;flex:1;color:var(--text)}
+.legend .lg{display:flex;align-items:center;gap:6px}
+.legend .dot{width:10px;height:10px;border-radius:3px}
+.custrow{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;padding:12px;box-shadow:var(--shadow);margin-bottom:9px}
+.custrow .rank{width:28px;height:28px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;background:var(--soft);color:var(--muted);flex:0 0 auto}
+.custrow .rank.r1{background:#fef3c7;color:#d97706}.custrow .rank.r2{background:#e2e8f0;color:#475569}.custrow .rank.r3{background:#ffedd5;color:#c2410c}
+.custrow .cn{font-weight:800;font-size:13px}
+.custrow .cp{font-size:10.5px;color:var(--tiny)}
+.custrow .cv{text-align:left;font-size:12.5px;font-weight:900;color:var(--primary)}
+.custrow .cv small{display:block;font-size:9.5px;color:var(--tiny);font-weight:700}
+
+/* ================= مودال و توست ================= */
+#modalHost .ovl{position:absolute;inset:0;background:rgba(8,12,24,.55);backdrop-filter:blur(3px);z-index:70;display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+#modalHost .sheet{background:var(--card);width:100%;max-height:88%;overflow-y:auto;border-radius:24px 24px 0 0;padding:18px 16px 22px;animation:slideUp .28s cubic-bezier(.2,.8,.25,1);color:var(--text)}
+#modalHost .sheet.mid{align-items:center;border-radius:24px;margin:0 18px;width:calc(100% - 36px);max-height:86%}
+@keyframes slideUp{from{transform:translateY(60px);opacity:.4}to{transform:translateY(0);opacity:1}}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sheet-h .sh-t{font-size:15.5px;font-weight:900}
+.sheet-x{width:32px;height:32px;border-radius:11px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted)}
+#toastHost{position:absolute;top:16px;left:0;right:0;z-index:90;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.toast{background:#1e293b;color:#fff;font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.3);max-width:86%;text-align:center;animation:toastIn .3s cubic-bezier(.2,.9,.3,1.3)}
+.toast.ok{background:#065f46}.toast.err{background:#9f1239}.toast.warn{background:#92400e}
+@keyframes toastIn{from{transform:translateY(-14px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* ================= ورود ================= */
+.login-wrap{min-height:100%;display:flex;flex-direction:column;justify-content:center;padding:30px 22px 34px}
+.logo{width:76px;height:76px;margin:0 auto 12px;border-radius:24px;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 12px 30px rgba(15,23,42,.3)}
+.login-t{text-align:center;font-size:22px;font-weight:900}
+.login-s{text-align:center;color:var(--muted);font-size:12.5px;margin-bottom:20px}
+.seg{display:flex;background:var(--soft);border-radius:16px;padding:4px;margin-bottom:18px}
+.seg .sg{flex:1;text-align:center;padding:10px;border-radius:13px;font-size:13.5px;font-weight:800;color:var(--muted);transition:.15s}
+.seg .sg.on{background:var(--card);color:var(--primary);box-shadow:0 2px 10px rgba(15,23,42,.12)}
+.quick-acc{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.qa{background:var(--primary-soft);border:1.5px solid transparent;color:var(--primary);border-radius:12px;padding:7px 11px;font-size:11px;font-weight:700}
+.demo-info{background:rgba(251,191,36,.12);border:1.5px solid rgba(245,158,11,.4);border-radius:14px;padding:11px 13px;font-size:11.5px;color:#b45309;margin-top:14px;line-height:1.9}
+body[data-theme="dark"] .demo-info{color:#fbbf24}
+
+/* ================= اعلان‌ها ================= */
+.ntf{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.ntf:last-child{border:none}
+.ntf .n-em{width:38px;height:38px;border-radius:12px;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:17px;flex:0 0 auto}
+.ntf.unread{background:var(--primary-soft);margin:0 -8px;padding:11px 8px;border-radius:12px;border-bottom:none;margin-bottom:4px}
+.ntf .n-t{font-size:12.5px;font-weight:700}
+.ntf .n-d{font-size:10px;color:var(--tiny)}
+.ntf .ndot{width:8px;height:8px;border-radius:50%;background:var(--primary);margin-top:7px;flex:0 0 auto}
+
+/* حالت خالی */
+.empty{text-align:center;padding:44px 20px;color:var(--tiny)}
+.empty .e-em{font-size:46px;margin-bottom:8px}
+.empty .e-t{font-weight:800;font-size:14px;color:var(--muted)}
+.empty .e-d{font-size:11.5px;margin-top:3px}
+
+/* جوایز و متفرقه */
+.pt-hero{background:linear-gradient(130deg,#b45309,#f59e0b);color:#fff;border-radius:22px;padding:18px;margin-bottom:12px;position:relative;overflow:hidden}
+.pt-hero .wc-bg{position:absolute;left:-24px;top:-24px;font-size:110px;opacity:.12}
+.menu-item{display:flex;align-items:center;gap:11px;background:var(--card);border-radius:16px;padding:13px;box-shadow:var(--shadow);margin-bottom:9px;cursor:pointer;transition:.15s}
+.menu-item:active{transform:scale(.98)}
+.menu-item .m-em{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 auto}
+.menu-item .m-n{font-weight:800;font-size:13.5px}
+.menu-item .m-d{font-size:11px;color:var(--muted)}
+.menu-item .chev{color:var(--border)}
+.menu-item .bdg2{background:#ef4444;color:#fff;font-size:10px;font-weight:800;border-radius:10px;padding:2px 8px}
+.rules{font-size:12px;color:var(--muted)}
+.rules li{margin-bottom:7px}
+.stars{display:flex;gap:5px;justify-content:center;font-size:30px;direction:ltr}
+.stars span{cursor:pointer;filter:grayscale(1);transition:.15s}
+.stars span.on{filter:none;transform:scale(1.1)}
+.spin-loader{width:44px;height:44px;border:4px solid var(--border);border-top-color:var(--primary);border-radius:50%;margin:14px auto;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.gw-em{font-size:44px;text-align:center;animation:pulse 1.5s infinite}
+
+/* تنظیمات ظاهر */
+.set-seg{display:flex;background:var(--soft);border-radius:14px;padding:4px;gap:4px}
+.set-seg button{flex:1;padding:9px;border-radius:11px;font-size:12.5px;font-weight:800;color:var(--muted)}
+.set-seg button.on{background:var(--card);color:var(--primary);box-shadow:0 2px 8px rgba(15,23,42,.12)}
+.swatches{display:flex;gap:10px;margin-top:12px}
+.swatch{width:34px;height:34px;border-radius:12px;border:2.5px solid var(--border);position:relative}
+.swatch.on{border-color:var(--text)}
+.sw-violet{background:linear-gradient(135deg,#4f46e5,#7c3aed)}
+.sw-blue{background:linear-gradient(135deg,#2563eb,#0891b2)}
+.sw-green{background:linear-gradient(135deg,#059669,#0d9488)}
+.sw-orange{background:linear-gradient(135deg,#ea580c,#d97706)}
+.msg-ico{width:42px;height:42px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:19px}
+.msg-ico.on{background:var(--primary-soft);outline:2px solid var(--primary)}
+@keyframes wfade{0%{opacity:.9}100%{opacity:0}}
+</style>
+</head>
+<body data-theme="light" data-accent="violet">
+<div class="stage">
+  <div class="phone" id="phone">
+    <div class="notch"></div>
+    <div id="view"></div>
+    <div id="tabbar"></div>
+    <div id="modalHost"></div>
+    <div id="toastHost"></div>
+  </div>
+  <div class="desktop-hint">🪪 <b>ثبتینو</b> — ورود مشتری: <b>ali / 123456</b> | ورود مدیر: <b>admin / admin123</b></div>
+</div>
+<script>
+'use strict';
+/* ================= DATA ================= */
+const APP_NAME='ثبتینو';
+
+const SERVICES=[
+/* --- خدمات دولت‌آباد / ثبتی --- */
+{id:'g1', cat:'gov', name:'صادره منفی سوءپیشینه', emoji:'📄', price:85000,  cost:45000, mode:'remote', dur:'تا ۲۴ ساعت',  needMelli:true,  needFile:false, desc:'صدور مدرک سوءپیشینه با کد رهگیری معتبر، ارسال فایل نهایی در واتساپ و ایمیل.'},
+{id:'g2', cat:'gov', name:'سابقه بیمه (تأمین اجتماعی)', emoji:'🏥', price:60000,  cost:30000, mode:'remote', dur:'تا ۳ ساعت',   needMelli:true,  needFile:false, desc:'استعلام و دریافت فایل رسمی سابقه بیمه برای استخدام، بازنشستگی و وام.'},
+{id:'g3', cat:'gov', name:'تغییر نشانی کارت ملی', emoji:'🏠', price:150000, cost:80000, mode:'remote', dur:'تا ۴۸ ساعت',  needMelli:true,  needFile:true,  fileLabel:'تصویر اجاره‌نامه / سند / قبض', desc:'ثبت تغییر نشانی در سامانه ثبت احوال بدون مراجعه حضوری.'},
+{id:'g4', cat:'gov', name:'تعویض و صدور کارت ملی', emoji:'🪪', price:210000, cost:120000,mode:'onsite', dur:'۳۰ دقیقه',    needMelli:true,  needFile:false, desc:'تکمیل پیش‌ثبت‌نام آنلاین و رزرو نوبت برای عکس‌برداری و اثر انگشت در شعبه.'},
+{id:'g5', cat:'gov', name:'گواهی فوت و روگوشی', emoji:'📑', price:90000,  cost:40000, mode:'remote', dur:'تا ۲۴ ساعت',  needMelli:true,  needFile:false, desc:'درخواست رونوشت یا گواهی وضعیت با ارسال مدارک از طریق اپ.'},
+{id:'g6', cat:'gov', name:'ثبت شکایت و دوکِـت', emoji:'⚖️', price:120000, cost:65000, mode:'remote', dur:'تا ۱۲ ساعت',  needMelli:true,  needFile:true,  fileLabel:'متن یا مدارک شکایت', desc:'تنظیم و ثبت آنلاین دادخواست و شکایت با وکلا همکار.'},
+{id:'g7', cat:'gov', name:'کارت پایان خدمت / معافیت', emoji:'🎖️', price:70000,  cost:35000, mode:'remote', dur:'تا ۶ ساعت',   needMelli:true,  needFile:false, desc:'استعلام وضعیت نظام وظیفه و دریافت گواهی کارت پایان خدمت.'},
+{id:'g8', cat:'gov', name:'انتقال مالکیت خودرو', emoji:'🚗', price:350000, cost:180000,mode:'onsite', dur:'۱ ساعت',      needMelli:true,  needFile:false, desc:'هماهنگی کامل انتقال سند خودرو؛ حضور خریدار و فروشنده در شعبه.'},
+{id:'g9', cat:'gov', name:'استعلام سند و پلاک خودرو', emoji:'🔍', price:45000,  cost:20000, mode:'remote', dur:'تا ۶ ساعت',   needMelli:true,  needFile:false, desc:'بررسی خلافی، معاینه فنی و وضعیت سند پیش از خرید.'},
+{id:'g10',cat:'gov', name:'گواهی تولد و هویت', emoji:'👨‍👩‍👧', price:80000,  cost:42000, mode:'remote', dur:'تا ۲۴ ساعت',  needMelli:true,  needFile:false, desc:'صدور گواهی تولد، فقدان یا هویت برای مصارف سفارت و اداری.'},
+/* --- خدمات کپی --- */
+{id:'c1', cat:'copy',name:'فتوکپی سیاه‌وسفید', emoji:'📠', price:3000,   cost:1500,  mode:'onsite', dur:'۱۰ دقیقه',    needMelli:false, needFile:false, desc:'فتوکپی تک و دو رو، کاغذ A4 و A3، بدون نوبت — حضوری.'},
+{id:'c2', cat:'copy',name:'فتوکپی رنگی', emoji:'🌈', price:8000,   cost:4000,  mode:'onsite', dur:'۱۰ دقیقه',    needMelli:false, needFile:false, desc:'فتوکپی رنگی با کیفیت بالا برای مدارک رسمی و آلبوم.'},
+{id:'c3', cat:'copy',name:'اسکن مدارک', emoji:'📷', price:5000,   cost:2000,  mode:'onsite', dur:'۱۰ دقیقه',    needMelli:false, needFile:false, desc:'اسکن رنگی با کیفیت ۳۰۰ تا ۶۰۰dpi و تحویل فایل از طریق اپ.'},
+{id:'c4', cat:'copy',name:'کوب و مهر قرارداد', emoji:'🗞️', price:25000,  cost:12000, mode:'onsite', dur:'۱۵ دقیقه',    needMelli:false, needFile:false, desc:'کوب قرارداد، مهر و امضا، آماده‌سازی اسناد اداری.'},
+{id:'c5', cat:'copy',name:'لمینیت و صحافی', emoji:'📔', price:60000,  cost:28000, mode:'onsite', dur:'۲۰ دقیقه',    needMelli:false, needFile:false, desc:'لمینیت کارت و مدارک، صحافی فنری و چسبی با جلد سخت.'},
+/* --- چاپ و طراحی --- */
+{id:'p1', cat:'print',name:'چاپ فایل رنگی (هر صفحه)', emoji:'🖨️', price:12000,  cost:6000,  mode:'remote', dur:'تا ۶ ساعت',   needMelli:false, needFile:true,  fileLabel:'فایل PDF / Word', desc:'آپلود فایل، انتخاب تعداد و جنس کاغذ؛ تحویل حضوری یا پست.'},
+{id:'p2', cat:'print',name:'چاپ و صحافی پایان‌نامه', emoji:'📚', price:480000, cost:250000,mode:'remote', dur:'تا ۴۸ ساعت',  needMelli:false, needFile:true,  fileLabel:'فایل پایان‌نامه', desc:'چاپ تک‌رنگ یا رنگی، صحافی جلد سخت با حکاکی عنوان.'},
+{id:'p3', cat:'print',name:'طراحی و چاپ کارت ویزیت', emoji:'💼', price:320000, cost:160000,mode:'remote', dur:'تا ۷۲ ساعت',  needMelli:false, needFile:true,  fileLabel:'لوگو / مشخصات (اختیاری)', desc:'طراحی گرافیکی + چاپ ۱۰۰ عدد کارت ویزیت سلفون‌مات.'},
+{id:'p4', cat:'print',name:'رایانش پلان (A0)', emoji:'📐', price:90000,  cost:45000, mode:'remote', dur:'تا ۱۲ ساعت',  needMelli:false, needFile:true,  fileLabel:'فایل پلان DWG / PDF', desc:'چاپ پلان معماری و نقشه در ابعاد A0 با کاغذ رول.'},
+{id:'p5', cat:'print',name:'چاپ تراکت (۱۰۰۰ عدد)', emoji:'📰', price:650000, cost:350000,mode:'remote', dur:'تا ۷۲ ساعت',  needMelli:false, needFile:true,  fileLabel:'فایل تراکت', desc:'چاپ افست تراکت A5 با انتخاب گرامرژ کاغذ.'},
+{id:'p6', cat:'print',name:'چاپ بنر و فلکسی', emoji:'🎏', price:180000, cost:90000, mode:'remote', dur:'تا ۴۸ ساعت',  needMelli:false, needFile:true,  fileLabel:'فایل بنر', desc:'چاپ بنر در هر ابعاد (هر مترمربع) با چاپگر بذرپاش.'},
+{id:'p7', cat:'print',name:'تایپ و صفحه‌آرایی', emoji:'⌨️', price:25000,  cost:12000, mode:'remote', dur:'تا ۲۴ ساعت',  needMelli:false, needFile:true,  fileLabel:'عکس / فایل متن دست‌نویس', desc:'تایپ دقیق متون فارسی و انگلیسی با صفحه‌آرایی حرفه‌ای.'}
+];
+
+const CATS=[['all','همه'],['gov','خدمات ثبتی'],['copy','کپی'],['print','چاپ و طراحی']];
+
+const STEPS=['submitted','in_review','in_progress','ready','delivered'];
+const STEP_LABEL={submitted:'ثبت درخواست',in_review:'بررسی و تأیید',in_progress:'در حال انجام',ready:'آماده تحویل',delivered:'تحویل شده'};
+const ST_LABEL={submitted:'ثبت شده',in_review:'در حال بررسی',in_progress:'در حال انجام',ready:'آماده تحویل',delivered:'تحویل شد',booked:'نوبت رزرو شد',attended:'حاضر شد',cancelled:'لغو شد',rejected:'رد شد'};
+
+/* کارت‌های بازی — ۴ ست، ۱۶ کارت */
+const SETS=[
+ {id:'docs', name:'مدارک هویتی', emoji:'🗂️', reward:{credit:60000,points:200}},
+ {id:'car',  name:'خودرو و نقل‌وانتقال', emoji:'🚘', reward:{credit:60000,points:200}},
+ {id:'print',name:'دنیای چاپ', emoji:'🖨️', reward:{credit:60000,points:200}},
+ {id:'gold', name:'کارت‌های ویژه ثبتینو', emoji:'✨', reward:{credit:150000,points:500}}
+];
+const CARDS=[
+ {id:'c_meli',   set:'docs', name:'کارت ملی هوشمند',   emoji:'🪪', r:'common'},
+ {id:'c_shen',   set:'docs', name:'شناسنامه گنج',       emoji:'📗', r:'common'},
+ {id:'c_sue',    set:'docs', name:'سوءپیشینه برنزی',    emoji:'📜', r:'rare'},
+ {id:'c_payan',  set:'docs', name:'کارت پایان خدمت طلایی',emoji:'🎖️', r:'epic'},
+ {id:'c_plak',   set:'car',  name:'پلاک شانس',          emoji:'🔢', r:'common'},
+ {id:'c_sanad',  set:'car',  name:'سند انتقال نقره‌ای',  emoji:'🧾', r:'common'},
+ {id:'c_aineh',  set:'car',  name:'معاینه فنی سبز',     emoji:'🚦', r:'rare'},
+ {id:'c_machine',set:'car',  name:'ماشین رویایی',       emoji:'🏎️', r:'epic'},
+ {id:'c_kopi',   set:'print',name:'فتوکپی کلاسیک',      emoji:'📠', r:'common'},
+ {id:'c_payanname',set:'print',name:'پایان‌نامه دانشجو',emoji:'🎓', r:'common'},
+ {id:'c_banner', set:'print',name:'بنر بزرگ',           emoji:'🎏', r:'rare'},
+ {id:'c_vizit',  set:'print',name:'کارت ویزیت الماسی',  emoji:'💠', r:'epic'},
+ {id:'c_track',  set:'gold', name:'رهگیر سریع',         emoji:'🛰️', r:'rare'},
+ {id:'c_coupon', set:'gold', name:'کوپن کپی رایگان',    emoji:'🎟️', r:'epic'},
+ {id:'c_ton',    set:'gold', name:'صندوق گنج',          emoji:'🧰', r:'legendary'},
+ {id:'c_logo',   set:'gold', name:'لوگوی طلایی ثبتینو', emoji:'👑', r:'legendary'}
+];
+const RARITY={common:'عادی',rare:'کمیاب',epic:'حماسی',legendary:'افسانه‌ای'};
+const RARITY_W={common:.58,rare:.25,epic:.13,legendary:.04};
+
+/* گردونه شانس — ۸ جایزه */
+const WHEEL=[
+ {label:'+۵ امتیاز',       type:'points',v:5,  w:.26,color:'#0ea5e9'},
+ {label:'+۱۰ امتیاز',      type:'points',v:10, w:.20,color:'#6366f1'},
+ {label:'+۲۰ امتیاز',      type:'points',v:20, w:.16,color:'#8b5cf6'},
+ {label:'+۵۰ امتیاز',      type:'points',v:50, w:.07,color:'#a855f7'},
+ {label:'+۱۰۰ امتیاز',     type:'points',v:100,w:.04,color:'#d946ef'},
+ {label:'۱۰ هزار تومان',   type:'credit',v:10000,w:.10,color:'#059669'},
+ {label:'۲۰ هزار تومان',   type:'credit',v:20000,w:.05,color:'#f59e0b'},
+ {label:'پشتکاری!',        type:'none',  v:0,  w:.12,color:'#64748b'}
+];
+
+/* فروشگاه امتیاز */
+const REDEEMS=[
+ {id:'r1', points:1000, credit:20000,  title:'۲۰ هزار تومان اعتبار', emoji:'💰'},
+ {id:'r2', points:2500, credit:50000,  title:'۵۰ هزار تومان اعتبار', emoji:'💎'},
+ {id:'r3', points:4000, credit:100000, title:'۱۰۰ هزار تومان اعتبار + ارسال رایگان', emoji:'🏆', best:true}
+];
+
+/* فعالیت‌ها برای دریافت کارت */
+const ACTS=[
+ {id:'insta', name:'دنبال‌کردن اینستاگرام', desc:'پیج ثبتینو را فالو کن و یک پک کارت بگیر', emoji:'📸', bg:'#fdf2f8', once:true},
+ {id:'tg',    name:'اشتراک‌گذاری در تلگرام', desc:'اپ را در یک گروه تلگرامی به اشتراک بگذار', emoji:'✈️', bg:'#eff6ff', once:true},
+ {id:'wa',    name:'معرفی در واتساپ', desc:'لینک اپ را برای دوستانت بفرست', emoji:'💬', bg:'#ecfdf5', once:true},
+ {id:'review',name:'ثبت دیدگاه', desc:'به خدمات ثبتینو امتیاز بده و نظرت را بنویس', emoji:'⭐', bg:'#fffbeb', once:true},
+ {id:'invite',name:'دعوت دوستان', desc:'به ازای هر دعوت موفق: پک کارت + ۱۰۰ امتیاز (تا ۳ بار)', emoji:'🎁', bg:'#fdf4ff', once:false},
+ {id:'order', name:'ثبت سفارش جدید', desc:'با هر سفارش تحویل‌شده یک پک کارت هدیه بگیر', emoji:'🧾', bg:'#f0fdf4', once:false, auto:true}
+];
+/* ================= CORE ================= */
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function faNum(n){return Number(n||0).toLocaleString('fa-IR')}
+function money(n){return faNum(Math.round(n))+' تومان'}
+function faD(n){return String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}
+function fmtDate(ts){return new Date(ts).toLocaleDateString('fa-IR',{year:'numeric',month:'2-digit',day:'2-digit'})}
+function fmtTime(ts){return new Date(ts).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}
+function fmtDT(ts){return fmtDate(ts)+' ساعت '+fmtTime(ts)}
+function dayKey(ts){const d=new Date(ts);return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);d.setHours(9+((n*5)%9),(n*17)%60,0,0);return d.getTime()}
+function midnightPlus(n){const d=new Date();d.setDate(d.getDate()+n);d.setHours(0,0,0,0);return d.getTime()}
+function uid(p){return p+Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3)}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function pickW(items,wkey){const tot=items.reduce((s,i)=>s+i[wkey],0);let r=Math.random()*tot;for(const it of items){r-=it[wkey];if(r<=0)return it}return items[items.length-1]}
+function digitsOnly(s){return String(s||'').replace(/[^\d]/g,'')}
+function fmtCard(no){return digitsOnly(no).replace(/(\d{4})(?=\d)/g,'$1-')}
+function svc(id){return SERVICES.find(s=>s.id===id)}
+function user(id){return db.users.find(u=>u.id===id)}
+
+/* ---------- icons ---------- */
+const I={
+home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.7V21h14V9.7"/><path d="M9.5 21v-6h5v6"/></svg>',
+list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor"/><circle cx="3.5" cy="12" r="1" fill="currentColor"/><circle cx="3.5" cy="18" r="1" fill="currentColor"/></svg>',
+gift:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="4" rx="1"/><path d="M5 13v8h14v-8"/><path d="M12 9v12"/><path d="M12 9c-4 0-5.5-1.7-5.5-3.4C6.5 3.7 8 3 9.2 3 11 3 12 5 12 9c0-4 1-6 2.8-6 1.2 0 2.7.7 2.7 2.6C17.5 7.3 16 9 12 9z"/></svg>',
+wallet:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H5a2 2 0 0 1 0-4h13v4"/><path d="M3 5v14a2 2 0 0 0 2 2h15v-8"/><path d="M20 13v8H5"/><circle cx="16.5" cy="16.5" r="1.4" fill="currentColor" stroke="none"/></svg>',
+user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-3.8 4.3-6 8-6s6.8 2.2 8 6"/></svg>',
+users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.2 3.6-5 6.5-5s5.5 1.8 6.5 5"/><path d="M16.5 4.7a3.5 3.5 0 0 1 0 6.6M18.5 15.4c1.7.7 3 2.2 3.5 4.6"/></svg>',
+cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>',
+bell:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 1 1 12 0c0 4 1.4 5.4 2.3 6.3.5.5.1 1.7-.7 1.7H4.4c-.8 0-1.2-1.2-.7-1.7C4.6 14.4 6 13 6 9z"/><path d="M9.7 20a2.5 2.5 0 0 0 4.6 0"/></svg>',
+search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.4-4.4"/></svg>',
+back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 6-6 6 6 6"/></svg>',
+check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg>',
+x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>',
+plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+logout:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5"/><path d="M10 8 6 12l4 4"/><path d="M6 12h10"/></svg>',
+chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 6 6 6-6 6"/></svg>',
+copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="8" width="12" height="13" rx="2.5"/><path d="M5 16a2 2 0 0 1-1-2V5a2 2 0 0 1 2-2h9a2 2 0 0 1 1.6.8"/></svg>',
+crown:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 4.5 4L12 5l4.5 7L21 8l-1.6 10.5H4.6L3 8z"/></svg>',
+chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></svg>',
+phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
+wheel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3v6.5M12 14.5V21M3.3 8.5l6 3M14.7 12.5l6 3M3.3 15.5l6-3M14.7 11.5l6-3"/></svg>',
+help:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.3 9.3A2.8 2.8 0 0 1 12 7.5c1.5 0 2.8 1.1 2.8 2.5 0 1.9-2.8 2.3-2.8 4"/><circle cx="12" cy="17.3" r=".4" fill="currentColor"/></svg>',
+edit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17v3z"/><path d="m13.5 6.5 3 3"/></svg>',
+card:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6 15h5"/></svg>',
+send:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10.5 13.5"/><path d="M21 3 14 21l-3.5-7.5L3 10l18-7z"/></svg>',
+palette:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21a9 9 0 1 1 9-9c0 2.2-1.8 3-3.2 3H16a2 2 0 0 0-1.5 3.3c.4.5.5 1 .2 1.6-.3.7-1 1.1-2.7 1.1z"/><circle cx="7.5" cy="10.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="7.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="16.5" cy="10.5" r="1.2" fill="currentColor" stroke="none"/></svg>'
+};
+
+/* ---------- toast & modal ---------- */
+function toast(msg,type){const t=document.createElement('div');t.className='toast '+(type||'');t.textContent=msg;$('#toastHost').appendChild(t);setTimeout(()=>{t.style.opacity='0';t.style.transition='.3s';setTimeout(()=>t.remove(),320)},2800)}
+function modal(html,cls){$('#modalHost').innerHTML='<div class="ovl" data-close="1"><div class="sheet '+(cls||'')+'" onclick="event.stopPropagation()">'+html+'</div></div>'}
+function sheetHead(title){return '<div class="sheet-h"><div class="sh-t">'+title+'</div><button class="sheet-x" onclick="closeModal()">'+I.x+'</button></div>'}
+function closeModal(){$('#modalHost').innerHTML=''}
+document.addEventListener('click',e=>{if(e.target&&e.target.dataset&&e.target.dataset.close)closeModal()});
+function confirmBox(msg,onYesName){modal(sheetHead('تأیید')+'<p style="font-size:13.5px;margin-bottom:16px">'+esc(msg)+'</p><div class="row"><button class="btn btn-o" onclick="closeModal()">انصراف</button><button class="btn btn-d" onclick="'+onYesName+'()">بله، انجام بده</button></div>','mid')}
+
+/* ---------- تم و ظاهر ---------- */
+function getTheme(){try{return JSON.parse(localStorage.getItem('sabtino_theme_v1'))||{theme:'light',accent:'violet'}}catch(e){return{theme:'light',accent:'violet'}}}
+function applyTheme(){const t=getTheme();document.body.dataset.theme=t.theme||'light';document.body.dataset.accent=t.accent||'violet'}
+function setTheme(theme,accent){const cur=getTheme();const t={theme:theme||cur.theme,accent:accent||cur.accent};localStorage.setItem('sabtino_theme_v1',JSON.stringify(t));applyTheme();render();toast(theme?'تم «'+(theme==='dark'?'تاریک':'روشن')+'» فعال شد':'رنگ‌بندی تغییر کرد','ok')}
+
+/* ---------- storage ---------- */
+const DB_KEY='sabtino_demo_v2';
+let db=null;
+const S={route:'login',params:{},cat:'all',q:'',ordFilter:'all',apptDay:0,apptSlot:null,form:{},loginTab:'cust',spin:false,pack:null,stars:0,chargeSel:null,msgIcon:'💌'};
+function save(){try{localStorage.setItem(DB_KEY,JSON.stringify(db))}catch(e){console.warn(e)}}
+function load(){try{return JSON.parse(localStorage.getItem(DB_KEY))}catch(e){return null}}
+
+/* ---------- seed ---------- */
+function seedDB(){
+  const rand=mulberry32(140302);
+  const ri=(a,b)=>a+Math.floor(rand()*(b-a+1));
+  const pick=a=>a[Math.floor(rand()*a.length)];
+  const names=[['علی رضایی','ali','09121200001'],['زهرا محمدی','zahra','09121200002'],['محمد حسینی','mohammad','09121200003'],['فاطمه کریمی','fatemeh','09121200004'],['رضا مرادی','reza','09121200005'],['سارا احمدی','sara','09121200006'],['ناصر غلامی','naser','09121200007'],['مریم صادقی','maryam','09121200008']];
+  const users=names.map((n,i)=>({id:'u'+(i+1),role:'customer',username:n[1],pass:'123456',name:n[0],phone:n[2],wallet:[850000,320000,540000,150000,610000,90000,420000,240000][i],points:[340,120,260,80,190,50,310,150][i],acts:{},packs:i===0?1:0,cards:[],setRewards:{},invites:0,streak:ri(2,7),lastLogin:Date.now(),refCode:'SK'+(1020+i),joined:daysAgo(ri(25,60)),nameEdited:true}));
+  /* کارت‌های اولیه برای دموی پخش‌شده */
+  users[0].cards=[{id:'c_meli',at:daysAgo(20)},{id:'c_shen',at:daysAgo(18)},{id:'c_kopi',at:daysAgo(15)},{id:'c_payanname',at:daysAgo(10)},{id:'c_track',at:daysAgo(6)}];
+  users[2].cards=[{id:'c_plak',at:daysAgo(12)},{id:'c_sanad',at:daysAgo(9)},{id:'c_banner',at:daysAgo(4)}];
+  users[4].cards=[{id:'c_meli',at:daysAgo(8)}];
+
+  const orders=[],txs=[];let seq=10410;
+  const svc=id=>SERVICES.find(s=>s.id===id);
+  function mkO(u,sid,status,age,pay,extra){
+    const s=svc(sid);const created=daysAgo(age);
+    const o={id:uid('o'),code:'SK-'+(++seq),type:'order',serviceId:sid,customerId:u.id,price:s.price,cost:s.cost,status:status,pay:pay,createdAt:created,file:null,note:extra&&extra.note||null,melli:extra&&extra.melli||null,tl:[]};
+    const idx=STEPS.indexOf(status);
+    if(status==='cancelled'){o.tl=[{st:'submitted',at:created},{st:'cancelled',at:created+5*36e5,note:'انصراف مشتری از سفارش'}]}
+    else{for(let k=0;k<=idx;k++)o.tl.push({st:STEPS[k],at:created+k*(ri(2,9))*36e5})}
+    orders.push(o);
+    txs.push({id:uid('t'),uid:u.id,type:'payment',amount:s.price,at:created,note:'پرداخت سفارش '+o.code+' — '+s.name});
+    return o;
+  }
+  function mkAppt(u,sid,dayOffset,slot){
+    const s=svc(sid);const at=midnightPlus(dayOffset)+(9*36e5);
+    const o={id:uid('o'),code:'SK-'+(++seq),type:'appointment',serviceId:sid,customerId:u.id,price:s.price,cost:s.cost,status:'booked',pay:'onsite',createdAt:daysAgo(ri(1,4)),appointDate:midnightPlus(dayOffset),slot:slot,tl:[{st:'booked',at:daysAgo(ri(1,4))}]};
+    orders.push(o);
+    txs.push({id:uid('t'),uid:u.id,type:'charge',amount:0,at:o.createdAt,note:'رزرو نوبت '+s.name+' — پرداخت در محل',info:true});
+    return o;
+  }
+  /* سفارش‌های منتخب برای «علی رضایی» — دموی اصلی */
+  mkO(users[0],'g1','submitted',0,'online',{note:'برای اخذ وام بانکی لازم دارم، فوری است.'});
+  mkO(users[0],'p2','in_progress',2,'wallet',{note:'صحافی جلد سخت با حکاکی عنوان لطفاً.'});
+  mkO(users[0],'g5','ready',5,'wallet');
+  mkO(users[0],'g7','delivered',12,'online');
+  mkO(users[0],'p7','delivered',20,'wallet',{note:'تایپ متن دست‌نویس ۸ صفحه.'});
+  mkAppt(users[0],'g4',1,'10:00');
+  /* بقیه مشتریان */
+  const remoteIds=['g1','g2','g3','g5','g6','g7','g9','g10','p1','p4','p6','p7'];
+  const onsiteIds=['c1','c2','c3','c4','c5','g4','g8'];
+  users.slice(1).forEach((u,i)=>{
+    const n=ri(2,5);
+    for(let k=0;k<n;k++){
+      const age=ri(0,28);const sid=age<4?pick(remoteIds):pick(remoteIds.concat(onsiteIds));
+      let st='submitted';
+      if(age>=12)st='delivered';else if(age>=7)st=pick(['ready','in_progress']);else if(age>=3)st=pick(['in_progress','in_review','ready']);else st=pick(['submitted','in_review']);
+      if(rand()<0.08&&age>=5)st='cancelled';
+      mkO(u,sid,st,age,rand()<0.5?'wallet':'online',{note:rand()<0.35?'لطفاً نتیجه را از طریق اپ اعلام کنید.':null});
+    }
+  });
+  mkO(users[3],'g1','delivered',0,'online');/* درآمد امروز */
+  mkO(users[5],'p1','submitted',0,'wallet');
+  mkAppt(users[2],'g8',2,'16:00');
+  mkAppt(users[4],'c1',0,'17:00');
+  mkAppt(users[6],'g4',3,'11:00');
+  const apptU2=mkAppt(users[1],'g4',-1,'11:00');/* نوبت دیروز حاضر شده */
+  apptU2.status='attended';
+  apptU2.tl=[{st:'booked',at:daysAgo(3)},{st:'attended',at:daysAgo(1)}];
+
+  txs.unshift({id:uid('t'),uid:'u1',type:'charge',amount:1000000,at:daysAgo(30),note:'شارژ کیف پول — کارت‌به‌کارت'});
+  txs.unshift({id:uid('t'),uid:'u3',type:'charge',amount:500000,at:daysAgo(15),note:'شارژ کیف پول — کارت‌به‌کارت'});
+  txs.unshift({id:uid('t'),uid:'u1',type:'prize',amount:20000,at:daysAgo(3),note:'جایزه گردونه شانس'});
+
+  const notifs=[
+    {id:uid('n'),uid:'u1',em:'🎉',txt:'سفارش گواهی فوت و روگوشی شما آماده تحویل است. در اسرع وقت مراجعه یا ارسال شود.',at:daysAgo(5),read:false},
+    {id:uid('n'),uid:'u1',em:'🎡',txt:'امروز گردونه شانس را نچرخانده‌اید! یک فرصت رایگان در انتظار شماست.',at:daysAgo(1),read:false},
+    {id:uid('n'),uid:'u1',em:'🎁',txt:'پک کارت جدید دارید! از بخش «جوایز و بازی‌ها» بازش کنید.',at:daysAgo(1),read:false}
+  ];
+  return {v:2,users:users,orders:orders,txs:txs,notifs:notifs,settings:{cardNo:'6219861012345678',cardHolder:'مدیریت ثبتینو',cardBank:'بانک سامان'},meta:{seq:seq},session:null};
+}
+
+/* ---------- helpers on db ---------- */
+function notify(uid_,em,txt){db.notifs.unshift({id:uid('n'),uid:uid_,em:em,txt:txt,at:Date.now(),read:false});if(db.notifs.length>60)db.notifs.pop()}
+function notifsOf(uid_){return db.notifs.filter(n=>n.uid===uid_)}
+function unreadCount(uid_){return notifsOf(uid_).filter(n=>!n.read).length}
+function addTx(u,type,amount,note){db.txs.unshift({id:uid('t'),uid:u.id,type:type,amount:amount,at:Date.now(),note:note})}
+function ordersOf(uid_){return db.orders.filter(o=>o.customerId===uid_)}
+function userStats(uid_){
+  const os=ordersOf(uid_).filter(o=>o.status!=='cancelled');
+  const rev=os.reduce((s,o)=>s+o.price,0);
+  const prof=os.reduce((s,o)=>s+(o.price-o.cost),0);
+  return {rev:rev,prof:prof,cnt:os.length};
+}
+function custRevenue7(){
+  const days=[];for(let i=6;i>=0;i--){const ts=midnightPlus(-i);const sum=db.txs.filter(t=>t.type==='payment'&&dayKey(t.at)===dayKey(ts)).reduce((s,t)=>s+t.amount,0);days.push({ts:ts,sum:sum})}
+  return days;
+}
+
+/* ---------- auth ---------- */
+function isAdmin(){return db.session&&db.session.role==='admin'}
+function cu(){return db.session&&db.session.role==='customer'?user(db.session.userId):null}
+function loginCustomer(u){db.session={role:'customer',userId:u.id};dailyBonus(u);save();S.route='home';render();setTimeout(showWelcomeOnce,350)}
+function dailyBonus(u){
+  const today=dayKey(Date.now());
+  if(u.lastLogin&&dayKey(u.lastLogin)===today)return;
+  u.lastLogin=Date.now();u.streak=(u.streak||0)+1;
+  u.points+=5;notify(u.id,'📅','ورود روزانه انجام شد (+۵ امتیاز). استریک شما: '+faNum(u.streak)+' روز');
+  save();
+}
+function showWelcomeOnce(){
+  if(cu()&&cu().seenWelcome)return;
+  if(cu()){cu().seenWelcome=true;save()}
+  modal(sheetHead('سلام! خوش آمدی 👋')+
+  '<div class="muted" style="font-size:12.5px;margin-bottom:12px">این یک <b>دموی تعاملی</b> از اپ «ثبتینو» است؛ همه بخش‌ها فعال‌اند و داده‌ها نمونه‌اند.</div>'+
+  '<ul class="rules" style="line-height:2">'+[
+   '🧾 سفارش آنلاین خدمات غیرحضوری با پیگیری لحظه‌ای',
+   '🕐 نوبت‌دهی حضوری برای خدمات دارای حضور مشتری',
+   '🎡 گردونه شانس + 🎴 بازی کارت‌ها با فعالیت در اپ و شبکه‌های اجتماعی',
+   '⭐ امتیاز، کیف پول و فروشگاه تبدیل امتیاز'
+  ].map(x=>'<li>'+x+'</li>').join('')+'</ul>'+
+  '<button class="btn btn-p mt14" onclick="closeModal()">شروع می‌کنم 🚀</button>','mid');
+}
+function logout(){db.session=null;save();S.route='login';S.loginTab='cust';render()}
+
+/* ---------- router & shell ---------- */
+const TABS_CUST=[['home','خانه','home'],['orders','سفارش‌ها','list'],['rewards','جوایز','gift'],['wallet','کیف پول','wallet'],['profile','پروفایل','user']];
+const TABS_ADMIN=[['adash','داشبورد','home'],['aorders','سفارش‌ها','list'],['acustomers','مشتریان','users'],['appts','نوبت‌ها','cal'],['profile','خروج','logout']];
+function tabOf(route){
+  if(['orders','orderDetail'].includes(route))return'orders';
+  if(['rewards','wheel','cards','acts'].includes(route))return'rewards';
+  if(['wallet'].includes(route))return'wallet';
+  if(['profile'].includes(route))return'profile';
+  if(['service','orderForm','apptForm'].includes(route))return'home';
+  return route;
+}
+function renderTabbar(){
+  const tb=$('#tabbar');
+  if(S.route==='login'){tb.innerHTML='';tb.style.display='none';$('#view').classList.remove('hasTab');return}
+  tb.style.display='flex';$('#view').classList.add('hasTab');
+  const tabs=isAdmin()?TABS_ADMIN:TABS_CUST;
+  const cur=tabOf(S.route);
+  tb.innerHTML=tabs.map(t=>{
+    let bdg='';
+    if(t[0]==='home'&&!isAdmin()&&unreadCount(cu().id)>0)bdg='<span class="bdg">'+faNum(unreadCount(cu().id))+'</span>';
+    if(t[0]==='rewards'&&!isAdmin()&&cu().packs>0)bdg='<span class="bdg">'+faNum(cu().packs)+'</span>';
+    if(t[0]==='profile'&&isAdmin())return '<button class="tb'+(cur===t[0]?' on':'')+'" onclick="logout()">'+I[t[2]]+'<span>'+t[1]+'</span></button>';
+    return '<button class="tb'+(cur===t[0]?' on':'')+'" onclick="navTo(\''+t[0]+'\')">'+I[t[2]]+bdg+'<span>'+t[1]+'</span></button>';
+  }).join('');
+}
+function navTo(r){go(r)}
+function go(route,params){
+  S.route=route;S.params=params||{};render();
+}
+function render(){
+  const v=$('#view');v.scrollTop=0;
+  renderTabbar();
+  if(S.route==='login'){v.innerHTML=screenLogin();return}
+  if(isAdmin()){
+    const m={adash:screenAdash,aorders:screenAOrders,acustomers:screenACustomers,acustdetail:screenACust,appts:screenAPpts,profile:screenProfile};
+    v.innerHTML=(m[S.route]||screenAdash)();return;
+  }
+  const m={home:screenHome,service:screenService,orderForm:screenOrderForm,apptForm:screenApptForm,orders:screenOrders,orderDetail:screenOrderDetail,wallet:screenWallet,rewards:screenRewards,wheel:screenWheel,cards:screenCards,profile:screenProfile};
+  v.innerHTML=(m[S.route]||screenHome)();
+}
+function pageHeader(title){return '<div class="page-h"><button class="hback" onclick="historyBack()">'+I.back+'</button><div class="ttl">'+title+'</div><div class="sp"></div></div>'}
+function historyBack(){
+  const backMap={service:'home',orderForm:'service',apptForm:'service',orderDetail:'orders',wheel:'rewards',cards:'rewards',acustdetail:'acustomers'};
+  go(backMap[S.route]||(isAdmin()?'adash':'home'));
+}
+/* ================= CUSTOMER SCREENS ================= */
+function copyText(t){
+  try{navigator.clipboard.writeText(t);toast('کپی شد 📋','ok');return}catch(e){}
+  try{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('کپی شد 📋','ok')}catch(e){toast('کپی نشد — لطفاً دستی کپی کنید','warn')}
+}
+/* ---------- login ---------- */
+function screenLogin(){
+  let h='<div class="login-wrap">';
+  h+='<div class="logo">🪪</div><div class="login-t">'+APP_NAME+'</div>';
+  h+='<div class="login-s">خدمات ثبتی، کپی و چاپ — سریع، غیرحضوری، با امتیاز</div>';
+  h+='<div class="seg"><button class="sg '+(S.loginTab==='cust'?'on':'')+'" onclick="S.loginTab=\'cust\';render()">👤 مشتری</button><button class="sg '+(S.loginTab==='admin'?'on':'')+'" onclick="S.loginTab=\'admin\';render()">👑 مدیر</button></div>';
+  if(S.loginTab==='cust'){
+    h+='<div class="card">';
+    h+='<div class="field"><label>نام و نام خانوادگی</label><input id="aName" placeholder="مثلاً: علی رضایی"></div>';
+    h+='<div class="field"><label>نام کاربری</label><input id="aUser" placeholder="مثلاً: ali_1375" style="direction:ltr;text-align:left"><div class="hint">با همین نام کاربری دفعات بعد وارد می‌شوید</div></div>';
+    h+='<div class="field"><label>گذرواژه</label><input id="aPass" type="password" placeholder="حداقل ۴ کاراکتر" style="direction:ltr;text-align:left"></div>';
+    h+='<div class="field"><label>شماره تماس (فقط عدد)</label><input id="aPhone" inputmode="numeric" placeholder="09xxxxxxxxx" maxlength="11" style="direction:ltr;text-align:left" oninput="this.value=digitsOnly(this.value).slice(0,11)"><div class="hint">شماره تماس شما برای پیگیری سفارش‌ها و هماهنگی استفاده می‌شود</div></div>';
+    h+='<button class="btn btn-p" onclick="doCustomerAuth()">ورود / ثبت‌نام</button>';
+    h+='<div class="quick-acc" style="justify-content:center">'+
+      [['علی (دموی کامل)','علی رضایی','ali','123456','09121200001'],['زهرا','زهرا محمدی','zahra','123456','09121200002'],['محمد','محمد حسینی','mohammad','123456','09121200003']].map(a=>'<button class="qa" onclick="quickFill(\''+a[2]+'\',\''+a[3]+'\',\''+a[4]+'\',\''+a[1]+'\')">'+a[0]+'</button>').join('')+'</div>';
+    h+='</div>';
+  }else{
+    h+='<div class="card">';
+    h+='<div class="field"><label>نام کاربری مدیر</label><input id="adminUser" placeholder="admin" style="direction:ltr"></div>';
+    h+='<div class="field"><label>گذرواژه</label><input id="adminPass" type="password" placeholder="••••••" style="direction:ltr"></div>';
+    h+='<button class="btn btn-p" onclick="adminLogin()">ورود به پنل مدیریت</button>';
+    h+='<button class="btn btn-o mt10" onclick="document.getElementById(\'adminUser\').value=\'admin\';document.getElementById(\'adminPass\').value=\'admin123\'">پرکردن سریع حساب دمو</button>';
+    h+='</div>';
+  }
+  h+='<div class="demo-info">ℹ️ اطلاعات دمو — مشتری: <b>ali / 123456</b> | مدیر: <b>admin / admin123</b><br>برای شروع تمیز: <b style="cursor:pointer" onclick="resetDemo()">↺ ریست داده‌های دمو</b></div>';
+  h+='</div>';
+  return h;
+}
+function quickFill(u,p,ph,n){
+  document.getElementById('aUser').value=u;
+  document.getElementById('aPass').value=p;
+  document.getElementById('aPhone').value=ph;
+  document.getElementById('aName').value=n;
+  toast('اطلاعات دمو پر شد — دکمه ورود را بزنید','ok');
+}
+function doCustomerAuth(){
+  const name=(document.getElementById('aName').value||'').trim();
+  const un=(document.getElementById('aUser').value||'').trim();
+  const pw=(document.getElementById('aPass').value||'').trim();
+  const ph=digitsOnly(document.getElementById('aPhone').value);
+  if(!/^[^\s]{3,20}$/.test(un)){toast('نام کاربری باید ۳ تا ۲۰ کاراکتر و بدون فاصله باشد','err');return}
+  if(pw.length<4){toast('گذرواژه باید حداقل ۴ کاراکتر باشد','err');return}
+  if(!/^\d{10,11}$/.test(ph)||(ph.length===11&&!ph.startsWith('09'))||(ph.length===10&&!ph.startsWith('9'))){toast('شماره تماس معتبر نیست — مثل: 09121234567','err');return}
+  const phone=ph.length===10?'0'+ph:ph;
+  const exist=db.users.find(x=>x.role==='customer'&&x.username===un);
+  if(exist){
+    if(exist.pass!==pw){toast('گذرواژه این نام کاربری اشتباه است','err');return}
+    if(phone!==exist.phone){exist.phone=phone;toast('شماره تماس پروفایل به‌روزرسانی شد','ok')}
+    if(name&&name!==exist.name){exist.name=name}
+    loginCustomer(exist);toast('خوش برگشتی، '+exist.name+' 👋','ok');
+    return;
+  }
+  if(!name){toast('برای ثبت‌نام، نام و نام خانوادگی را هم وارد کنید','err');return}
+  const u={id:uid('u'),role:'customer',username:un,pass:pw,name:name,phone:phone,wallet:0,points:0,acts:{},packs:0,cards:[],setRewards:{},invites:0,streak:0,lastLogin:0,refCode:'SK'+Math.floor(1000+Math.random()*9000),joined:Date.now(),nameEdited:true};
+  db.users.push(u);
+  notify(u.id,'👋','ثبت‌نام شما با موفقیت انجام شد! خوش آمدید.');
+  loginCustomer(u);toast('ثبت‌نام انجام شد — خوش آمدید 🎉','ok');
+}
+function adminLogin(){
+  const u=(document.getElementById('adminUser').value||'').trim();
+  const p=(document.getElementById('adminPass').value||'').trim();
+  if(u==='admin'&&p==='admin123'){db.session={role:'admin'};save();S.route='adash';render();toast('خوش آمدید مدیر گرامی 👑','ok')}
+  else toast('نام کاربری یا گذرواژه اشتباه است (دمو: admin / admin123)','err');
+}
+
+/* ---------- home ---------- */
+function svcGridHTML(){
+  let list=SERVICES.filter(s=>(S.cat==='all'||s.cat===S.cat)&&(!S.q||s.name.includes(S.q)||s.desc.includes(S.q)));
+  if(S.q)list=list.slice(0,10);else if(S.cat!=='all')list=list.slice(0,10);else list=list.slice(0,8);
+  if(!list.length)return '<div class="svc-more" style="grid-column:1/-1">سرویسی با این عنوان پیدا نشد 🔍</div>';
+  return list.map(s=>'<button class="svc" onclick="go(\'service\',{id:\''+s.id+'\'})">'+
+    '<span class="s-b '+(s.mode==='remote'?'b-remote':'b-onsite')+'">'+(s.mode==='remote'?'غیرحضوری 🟢':'حضوری 🕐')+'</span>'+
+    '<div class="s-em">'+s.emoji+'</div><div class="s-n">'+s.name+'</div><div class="s-p">از '+faNum(s.price)+' تومان</div></button>').join('');
+}
+function refreshSvc(){if($('#catChips'))$('#catChips').innerHTML=catChipsHTML();if($('#svcGrid'))$('#svcGrid').innerHTML=svcGridHTML()}
+function catChipsHTML(){return CATS.map(c=>'<button class="chip '+(S.cat===c[0]?'on':'')+'" onclick="S.cat=\''+c[0]+'\';refreshSvc()">'+c[1]+'</button>').join('')}
+function screenHome(){
+  const u=cu();
+  const hour=new Date().getHours();
+  const greet=hour<12?'صبح بخیر':hour<18?'وقت بخیر':'شب بخیر';
+  let h='<div class="hh"><div class="hh-top"><div class="row"><div class="avatar">'+u.name.trim().charAt(0)+'</div><div><div class="hh-greet">'+greet+' 👋</div><div class="hh-name">'+esc(u.name)+'</div></div></div>';
+  const un=unreadCount(u.id);
+  h+='<button class="hbell" onclick="openNotifs()">'+I.bell+(un?'<span class="bdg">'+faNum(un)+'</span>':'<span class="bdg hide">0</span>')+'</button></div>';
+  h+='<div class="hh-chips">'+
+    '<button class="hchip" onclick="navTo(\'wallet\')"><span class="hc-em">💳</span><span class="hc-l">کیف پول</span><span class="hc-v">'+faNum(u.wallet)+' تومان</span></button>'+
+    '<button class="hchip glass" onclick="navTo(\'rewards\')"><span class="hc-em">⭐</span><span class="hc-l">امتیاز شما</span><span class="hc-v">'+faNum(u.points)+'</span></button>'+
+    (u.packs>0?'<button class="hchip pack" onclick="navTo(\'cards\')"><span class="hc-em">🎁</span><span class="hc-l">پک کارت</span><span class="hc-v">'+faNum(u.packs)+' بازنشده</span></button>':
+     '<button class="hchip" onclick="navTo(\'cards\')"><span class="hc-em">🎴</span><span class="hc-l">آلبوم کارت</span><span class="hc-v">'+faNum(u.cards.length)+' از '+faNum(CARDS.length)+'</span></button>')+
+    '</div></div>';
+  h+='<div class="pad">';
+  h+='<div class="search">'+I.search+'<input placeholder="جستجوی خدمت... مثلاً سوءپیشینه" value="'+esc(S.q)+'" oninput="S.q=this.value;refreshSvc()"></div>';
+  h+='<div class="banners">'+
+    '<button class="banner bn1" onclick="navTo(\'wheel\')"><span class="b-em">🎡</span><div class="b-t">گردونه شانس</div><div class="b-d">هر روز یک چرخش رایگان — جایزه نقدی و امتیاز</div><span class="b-cta">همین حالا بچرخان ←</span></button>'+
+    '<button class="banner bn2" onclick="navTo(\'cards\')"><span class="b-em">🎴</span><div class="b-t">بازی کارت‌های ثبتینو</div><div class="b-d">با فعالیت در اپ و شبکه‌های اجتماعی کارت جمع کن</div><span class="b-cta">دریافت پک کارت ←</span></button>'+
+    '<button class="banner bn3" onclick="go(\'service\',{id:\'p2\'})"><span class="b-em">📚</span><div class="b-t">چاپ پایان‌نامه با ۱۵٪ تخفیف</div><div class="b-d">فایل را بفرست، تحویل ۴۸ ساعته</div><span class="b-cta">ثبت سفارش ←</span></button></div>';
+  h+='<div class="sect-t"><span>خدمات</span><span class="tiny">'+faNum(SERVICES.length)+' خدمت فعال</span></div>';
+  h+='<div class="chips" id="catChips">'+catChipsHTML()+'</div>';
+  h+='<div class="svc-grid" id="svcGrid">'+svcGridHTML()+'</div>';
+  const recent=ordersOf(u.id).slice().sort((a,b)=>b.createdAt-a.createdAt).slice(0,3);
+  if(recent.length)h+='<div class="sect-t"><span>آخرین درخواست‌های شما</span><button class="more" onclick="navTo(\'orders\')">همه ←</button></div>'+recent.map(o=>ordCard(o,true)).join('');
+  h+='</div>';
+  return h;
+}
+function ordCard(o,mini){
+  const s=svc(o.serviceId);const u=user(o.customerId);
+  const isAppt=o.type==='appointment';
+  return '<button class="ord" onclick="go(\'orderDetail\',{id:\''+o.id+'\'})" style="width:100%;text-align:right">'+
+    '<div class="o-em">'+(isAppt?'🕐':s.emoji)+'</div><div style="flex:1;min-width:0"><div class="o-n">'+s.name+'</div>'+
+    '<div class="o-m">'+(mini&&u?esc(u.name)+' • ':'')+'کد: '+o.code+(isAppt?' • '+fmtDate(o.appointDate)+' - '+faD(o.slot):' • '+fmtDate(o.createdAt))+'</div></div>'+
+    '<div style="text-align:left"><span class="stb st-'+o.status+'">'+ST_LABEL[o.status]+'</span>'+(mini?'':'<div class="tiny mt6">'+faNum(o.price)+' تومان</div>')+'</div></button>';
+}
+
+/* ---------- جزئیات خدمت ---------- */
+function screenService(){
+  const s=svc(S.params.id);
+  let h=pageHeader(s.name);
+  h+='<div class="pad">';
+  h+='<div class="card center" style="padding:22px"><div style="font-size:56px;margin-bottom:8px">'+s.emoji+'</div><div class="bold" style="font-size:17px">'+s.name+'</div>'+
+     '<span class="stb '+(s.mode==='remote'?'b-remote':'b-onsite')+' mt10" style="font-size:11px">'+(s.mode==='remote'?'✅ غیرحضوری — بدون مراجعه':'🕐 حضوری — نیازمند نوبت')+'</span>'+
+     '<p class="muted mt10" style="font-size:12.5px">'+s.desc+'</p></div>';
+  h+='<div class="card"><div class="card-t">📋 مشخصات خدمت</div>'+
+    '<div class="sumrow"><span class="muted">هزینه خدمت</span><b class="indigo">'+money(s.price)+'</b></div>'+
+    '<div class="sumrow"><span class="muted">زمان انجام</span><b>'+s.dur+'</b></div>'+
+    '<div class="sumrow"><span class="muted">نوع انجام</span><b>'+(s.mode==='remote'?'غیرحضوری (آنلاین)':'حضوری (با نوبت)')+'</b></div>'+
+    '<div class="sumrow"><span class="muted">امتیاز هدیه</span><b>+'+faNum(15+Math.floor(s.price/10000))+' امتیاز ⭐</b></div></div>';
+  if(s.mode==='remote'){
+    h+='<div class="card" style="background:var(--primary-soft)"><div class="row" style="align-items:flex-start;gap:9px"><span style="font-size:20px">✨</span><div class="muted" style="font-size:12px">این خدمت <b>کاملاً غیرحضوری</b> انجام می‌شود؛ مدارک را از طریق اپ ارسال کنید، آنلاین پرداخت کنید و نتیجه را همان‌جا تحویل بگیرید.</div></div></div>';
+    h+='<button class="btn btn-p" onclick="go(\'orderForm\',{id:\''+s.id+'\'})">🧾 ثبت سفارش آنلاین</button>';
+  }else{
+    h+='<div class="card" style="background:rgba(251,191,36,.12)"><div class="row" style="align-items:flex-start;gap:9px"><span style="font-size:20px">🕐</span><div class="muted" style="font-size:12px">این خدمت به <b>حضور شما در شعبه</b> نیاز دارد؛ از همین صفحه نوبت بگیرید تا بدون معطلی پذیرش شوید. پرداخت در محل انجام می‌شود.</div></div></div>';
+    h+='<button class="btn btn-p" onclick="go(\'apptForm\',{id:\''+s.id+'\'})">📅 رزرو نوبت حضوری</button>';
+  }
+  h+='</div>';
+  return h;
+}
+
+/* ---------- فرم سفارش (غیرحضوری) ---------- */
+function screenOrderForm(){
+  const s=svc(S.params.id);const u=cu();
+  S.form.name=S.form.name||u.name;S.form.melli=S.form.melli||'';S.form.files=S.form.files||[];S.form.note=S.form.note||'';
+  const reqFile=s.needFile;
+  let h=pageHeader('ثبت سفارش — '+s.name);
+  h+='<div class="pad">';
+  h+='<div class="card"><div class="card-t">👤 اطلاعات درخواست</div>';
+  h+='<div class="field"><label>نام و نام خانوادگی</label><input id="fName" value="'+esc(S.form.name)+'" oninput="S.form.name=this.value"></div>';
+  if(s.needMelli)h+='<div class="field"><label>کد ملی</label><input id="fMelli" inputmode="numeric" maxlength="10" value="'+esc(S.form.melli)+'" style="direction:ltr;text-align:left" oninput="S.form.melli=digitsOnly(this.value).slice(0,10)"><div class="hint">کد ملی متقاضی خدمت</div></div>';
+  h+='<div class="field"><label>شماره تماس (از پروفایل)</label><input value="'+u.phone+'" disabled style="background:var(--soft);direction:ltr;text-align:left"></div>';
+  h+='<div class="field"><label>'+(reqFile?'📎 بارگذاری مدارک — '+esc(s.fileLabel||'فایل'):'📷 پیوست عکس مدارک (اختیاری)')+'</label>'+
+    '<label class="filebox"><input type="file" id="fFile" multiple accept="image/*,.pdf" onchange="filesChosen(this)">'+
+    (S.form.files.length?'✅ '+faNum(S.form.files.length)+' فایل انتخاب شد:<br><span class="tiny" style="direction:ltr">'+esc(S.form.files.join(' | '))+'</span>':'انتخاب فایل یا عکس (تا ۲۰ مگابایت)')+'</label>'+
+    (reqFile?'<div class="hint">این خدمت بدون پیوست مدارک قابل ثبت نیست.</div>':'<div class="hint">اگر مدرکی لازم است (مثل کارت ملی، فرم یا نامه اداری)، عکسش را پیوست کنید تا خدمت بی‌دردسر و دقیق‌تر انجام شود.</div>')+'</div>';
+  h+='<div class="field"><label>توضیحات سفارش (اختیاری)</label><textarea id="fNote" placeholder="مثلاً: لطفاً فوری انجام شود / جنس کاغذ..." oninput="S.form.note=this.value">'+esc(S.form.note)+'</textarea></div></div>';
+  const pts=15+Math.floor(s.price/10000);
+  h+='<div class="card"><div class="card-t">💰 فاکتور</div><div class="sumbox">'+
+    '<div class="sumrow"><span class="muted">'+s.name+'</span><span>'+faNum(s.price)+' تومان</span></div>'+
+    '<div class="sumrow"><span class="muted">زمان تحویل</span><span>'+s.dur+'</span></div>'+
+    '<div class="sumrow"><span class="muted">امتیاز کسب‌شده</span><span class="green bold">+'+faNum(pts)+' ⭐</span></div>'+
+    '<div class="sumrow total"><span>مبلغ قابل پرداخت</span><span class="indigo">'+money(s.price)+'</span></div></div></div>';
+  h+='<button class="btn btn-p" onclick="openPay(\''+s.id+'\')">💳 ادامه و پرداخت</button>';
+  h+='</div>';
+  return h;
+}
+function filesChosen(inp){
+  const fs=[...(inp.files||[])].map(f=>f.name);
+  if(fs.length){S.form.files=fs;render();toast(fs.length+' فایل پیوست شد 📎','ok')}
+}
+function openPay(sid){
+  const s=svc(sid);const u=cu();
+  const name=($('#fName')&&document.getElementById('fName').value.trim())||u.name;
+  if(!name){toast('نام را وارد کنید','err');return}
+  const melli=s.needMelli?(document.getElementById('fMelli').value.trim()||''):'';
+  if(s.needMelli&&!/^\d{10}$/.test(melli)){toast('کد ملی باید ۱۰ رقم باشد','err');return}
+  if(s.needFile&&!(S.form.files||[]).length){toast('برای این خدمت، پیوست مدارک الزامی است','err');return}
+  S.form.name=name;S.form.melli=melli;S.form.note=($('#fNote')?document.getElementById('fNote').value.trim():'');
+  const enough=u.wallet>=s.price;
+  modal(sheetHead('روش پرداخت — '+money(s.price))+
+    '<button class="payopt '+(enough?'on':'')+'" '+(enough?'onclick="confirmPay(\'wallet\')"':'')+'><span class="em">👛</span><span style="flex:1">کیف پول ثبتینو<small>موجودی: '+faNum(u.wallet)+' تومان'+(enough?'':' — کافی نیست (کمبود '+faNum(s.price-u.wallet)+' تومان)')+'</small></span><span class="radio-dot"></span></button>'+
+    '<button class="payopt" onclick="confirmPay(\'online\')"><span class="em">🏦</span><span style="flex:1">پرداخت اینترنتی<small>درگاه بانکی امن (شبیه‌سازی)</small></span><span class="radio-dot"></span></button>'+
+    (enough?'':'<button class="btn btn-o" onclick="closeModal();navTo(\'wallet\')">💳 شارژ کیف پول</button>'),'mid');
+}
+function confirmPay(method){
+  const s=svc(S.params.id);const u=cu();
+  if(method==='wallet'&&u.wallet<s.price){toast('موجودی کیف پول کافی نیست','err');return}
+  S.payMethod=method;
+  if(method==='online'){gatewaySim(s.price,'finishOrder()');return}
+  finishOrder();
+}
+function gatewaySim(amount,cbName){
+  modal('<div class="center" style="padding:8px 0"><div class="gw-em">🏦</div><div class="bold mt10" style="font-size:15px">درگاه پرداخت بانکی</div><div class="muted mt6">مبلغ: '+money(amount)+'</div><div class="spin-loader"></div><div class="tiny">در حال اتصال به درگاه... چند لحظه صبر کنید</div></div>','mid');
+  setTimeout(function(){
+    modal('<div class="center" style="padding:8px 0"><div style="font-size:56px">✅</div><div class="bold mt6" style="font-size:16px">پرداخت با موفقیت انجام شد</div><div class="muted mt6">مبلغ: '+money(amount)+' — کد پیگیری: '+faNum(Math.floor(100000+Math.random()*900000))+'</div><button class="btn btn-p mt14" onclick="closeModal();'+cbName+'">ادامه</button></div>','mid');
+  },1600);
+}
+function finishOrder(){
+  const s=svc(S.params.id);const u=cu();
+  createOrder(s,u,'submitted');
+}
+function createOrder(s,u,nextStatus){
+  const method=S.payMethod||'online';
+  const now=Date.now();
+  const files=(S.form.files||[]);
+  const o={id:uid('o'),code:'SK-'+(++db.meta.seq),type:'order',serviceId:s.id,customerId:u.id,price:s.price,cost:s.cost,status:'submitted',pay:method,createdAt:now,file:files.length?files.join(' ، '):null,fileCount:files.length,note:S.form.note,melli:S.form.melli,tl:[{st:'submitted',at:now}]};
+  db.orders.unshift(o);
+  addTx(u,'payment',s.price,'پرداخت سفارش '+o.code+' — '+s.name);
+  if(method==='wallet')u.wallet-=s.price;
+  const pts=15+Math.floor(s.price/10000);
+  u.points+=pts;
+  notify(u.id,'✅','سفارش «'+s.name+'» با کد '+o.code+' ثبت شد. مراحل انجام را در بخش سفارش‌ها دنبال کنید.');
+  notify('admin','🧾','سفارش جدید: '+s.name+' — '+u.name+' ('+money(s.price)+')');
+  save();closeModal();toast('سفارش با موفقیت ثبت شد 🎉','ok');
+  S.form={};
+  go('orderDetail',{id:o.id});
+}
+
+/* ---------- فرم نوبت‌دهی ---------- */
+const SLOT_TIMES=['9:00','10:30','12:00','14:00','15:30','17:00','18:30'];
+function slotTaken(dayTs,slot){
+  const key=dayKey(dayTs);
+  if(db.orders.some(o=>o.type==='appointment'&&o.status==='booked'&&dayKey(o.appointDate)===key&&o.slot===slot))return true;
+  let hash=0;const str=key+slot;for(let i=0;i<str.length;i++)hash=(hash*31+str.charCodeAt(i))>>>0;
+  return hash%4===0;
+}
+function screenApptForm(){
+  const s=svc(S.params.id);
+  S.apptDay=S.apptDay||0;S.apptSlot=S.apptSlot||null;
+  let h=pageHeader('رزرو نوبت — '+s.name);
+  h+='<div class="pad">';
+  h+='<div class="card"><div class="card-t">📅 انتخاب روز</div><div class="cal">'+daysHTML()+'</div></div>';
+  h+='<div class="card"><div class="card-t">⏰ انتخاب ساعت</div><div class="slots">'+SLOT_TIMES.map(t=>{const taken=slotTaken(midnightPlus(S.apptDay),t);return '<button class="slot '+(S.apptSlot===t?'on':'')+(taken?' taken':'')+'" '+(taken?'':'onclick="S.apptSlot=\''+t+'\';render()"')+'>'+faD(t)+'</button>'}).join('')+'</div><div class="tiny mt10">🕐 ساعت‌های خط‌خورده قبلاً رزرو شده‌اند</div></div>';
+  h+='<div class="card"><div class="card-t">📍 اطلاعات شعبه</div><div class="muted" style="font-size:12.5px">شعبه مرکزی ثبتینو — دولت‌آباد، خیابان خدمات ثبتی، پلاک ۱۲<br>🕐 شنبه تا پنجشنبه ۹ تا ۱۹ • پرداخت در محل</div></div>';
+  h+='<button class="btn btn-p" onclick="confirmAppt(\''+s.id+'\')">تأیید و رزرو نوبت</button>';
+  h+='</div>';
+  return h;
+}
+function daysHTML(){
+  let out='';
+  for(let i=0;i<7;i++){
+    const ts=midnightPlus(i);const d=new Date(ts);
+    const wd=d.toLocaleDateString('fa-IR',{weekday:'short'});
+    const day=d.getDate();
+    out+='<button class="cday '+(S.apptDay===i?'on':'')+'" onclick="S.apptDay='+i+';S.apptSlot=null;render()"><div class="cd-n">'+(i===0?'امروز':i===1?'فردا':wd)+'</div><div class="cd-d">'+faNum(day)+'</div></button>';
+  }
+  return out;
+}
+function confirmAppt(sid){
+  if(S.apptSlot===null){toast('لطفاً یک ساعت را انتخاب کنید','err');return}
+  const s=svc(sid);const u=cu();
+  if(slotTaken(midnightPlus(S.apptDay),S.apptSlot)){toast('این ساعت همین الان رزرو شد؛ ساعت دیگری انتخاب کنید','err');S.apptSlot=null;render();return}
+  const now=Date.now();
+  const o={id:uid('o'),code:'SK-'+(++db.meta.seq),type:'appointment',serviceId:sid,customerId:u.id,price:s.price,cost:s.cost,status:'booked',pay:'onsite',createdAt:now,appointDate:midnightPlus(S.apptDay),slot:S.apptSlot,tl:[{st:'booked',at:now}]};
+  db.orders.unshift(o);
+  addTx(u,'charge',0,'رزرو نوبت '+s.name+' — پرداخت در محل');
+  u.points+=10;
+  notify(u.id,'📅','نوبت شما برای «'+s.name+'» در تاریخ '+fmtDate(o.appointDate)+' ساعت '+faD(o.slot)+' رزرو شد. ۱۰ امتیاز هدیه بگیرید!');
+  notify('admin','📅','نوبت جدید: '+s.name+' — '+u.name+' — '+fmtDate(o.appointDate)+' ساعت '+faD(o.slot));
+  save();toast('نوبت شما رزرو شد 🎉','ok');
+  go('orderDetail',{id:o.id});
+}
+
+/* ---------- سفارش‌های من ---------- */
+let ordTab='order';
+function screenOrders(){
+  const u=cu();
+  let h=pageHeader('درخواست‌های من');
+  h+='<div class="pad">';
+  h+='<div class="tabs"><button class="tab '+(ordTab==='order'?'on':'')+'" onclick="ordTab=\'order\';render()">🧾 سفارش‌های آنلاین</button><button class="tab '+(ordTab==='appt'?'on':'')+'" onclick="ordTab=\'appt\';render()">🕐 نوبت‌های حضوری</button></div>';
+  if(ordTab==='order'){
+    h+='<div class="chips">'+[['all','همه'],['active','در حال انجام'],['ready','آماده تحویل'],['delivered','تحویل‌شده'],['cancelled','لغوشده']].map(f=>'<button class="chip '+(S.ordFilter===f[0]?'on':'')+'" onclick="S.ordFilter=\''+f[0]+'\';render()">'+f[1]+'</button>').join('')+'</div>';
+    const os=ordersOf(u.id).filter(o=>o.type==='order').filter(o=>{
+      if(S.ordFilter==='all')return true;
+      if(S.ordFilter==='active')return['submitted','in_review','in_progress'].includes(o.status);
+      return o.status===S.ordFilter;
+    }).sort((a,b)=>b.createdAt-a.createdAt);
+    if(!os.length)h+='<div class="empty"><div class="e-em">🫙</div><div class="e-t">هنوز سفارشی ثبت نکرده‌اید</div><div class="e-d">از صفحه اصلی یک خدمت غیرحضوری انتخاب کنید</div><button class="btn btn-p btn-s mt14" onclick="navTo(\'home\')">مشاهده خدمات</button></div>';
+    else h+=os.map(o=>ordCard(o,false)).join('');
+  }else{
+    const aps=ordersOf(u.id).filter(o=>o.type==='appointment').sort((a,b)=>(b.appointDate||0)-(a.appointDate||0));
+    if(!aps.length)h+='<div class="empty"><div class="e-em">🕐</div><div class="e-t">نوبتی رزرو نکرده‌اید</div><div class="e-d">خدمات حضوری مانند تعویض کارت ملی نیاز به نوبت دارند</div></div>';
+    else h+=aps.map(o=>ordCard(o,false)).join('');
+  }
+  h+='</div>';
+  return h;
+}
+function screenOrderDetail(){
+  const o=db.orders.find(x=>x.id===S.params.id);
+  if(!o){return pageHeader('سفارش')+'<div class="empty"><div class="e-em">❓</div><div class="e-t">سفارش پیدا نشد</div></div>'}
+  const s=svc(o.serviceId);
+  const isAppt=o.type==='appointment';
+  let h=pageHeader('پیگیری درخواست '+o.code);
+  h+='<div class="pad">';
+  h+='<div class="card center"><div style="font-size:44px">'+(isAppt?'🕐':s.emoji)+'</div><div class="bold mt6" style="font-size:16px">'+s.name+'</div><span class="stb st-'+o.status+' mt6" style="font-size:12px">'+ST_LABEL[o.status]+'</span></div>';
+  if(isAppt){
+    h+='<div class="card" style="background:var(--primary-soft)"><div class="center"><div class="tiny">تاریخ نوبت شما</div><div class="bold" style="font-size:18px">'+fmtDate(o.appointDate)+' — ساعت '+faD(o.slot)+'</div><div class="muted mt6" style="font-size:12px">📍 شعبه مرکزی ثبتینو، دولت‌آباد • پرداخت در محل: '+money(o.price)+'</div></div></div>';
+    h+='<div class="card"><div class="card-t">📝 وضعیت نوبت</div><div class="tl">'+
+      [{st:'booked',lb:'نوبت رزرو شد',d:'منتظر حضور شما در شعبه هستیم'},{st:'attended',lb:'حضور انجام شد',d:'خدمت در شعبه به شما ارائه شد'}].map(st=>{
+        const done=['booked','attended'].indexOf(o.status)>=['booked','attended'].indexOf(st.st);
+        const cur=o.status===st.st;
+        return '<div class="tl-item '+(done?'done':'')+' '+(cur?'cur':'')+'"><span class="tl-dot"></span><div class="t-n">'+st.lb+'</div><div class="t-d">'+st.d+'</div></div>';
+      }).join('')+'</div></div>';
+  }else{
+    const idx=STEPS.indexOf(o.status);
+    h+='<div class="card"><div class="card-t">🚀 مراحل انجام سفارش</div><div class="tl">';
+    if(o.status==='cancelled'){
+      h+='<div class="tl-item done"><span class="tl-dot"></span><div class="t-n">ثبت درخواست</div><div class="t-d">'+fmtDT(o.createdAt)+'</div></div>';
+      h+='<div class="tl-item"><span class="tl-dot" style="background:#ef4444"></span><div class="t-n red">سفارش لغو شد</div><div class="t-d">'+(o.tl[o.tl.length-1].note||'')+'</div></div>';
+    }else{
+      STEPS.forEach((st,i)=>{
+        const done=i<=idx;const cur=i===idx;
+        const ev=o.tl.find(t=>t.st===st);
+        const desc={submitted:'درخواست شما با موفقیت ثبت و پرداخت شد',in_review:'مدارک شما در حال بررسی و تأیید است',in_progress:'سرویس در حال انجام است',ready:'نتیجه آماده است؛ ارسال یا تحویل انجام می‌شود',delivered:'سفارش کامل شد — امتیاز و پک کارت هدیه بگیرید!'}[st];
+        h+='<div class="tl-item '+(done?'done':'')+' '+(cur?'cur':'')+'"><span class="tl-dot"></span><div class="t-n">'+STEP_LABEL[st]+'</div><div class="t-d">'+(ev?fmtDT(ev.at):desc)+'</div></div>';
+      });
+    }
+    h+='</div></div>';
+  }
+  h+='<div class="card"><div class="card-t">🧾 جزئیات</div>'+
+    '<div class="sumrow"><span class="muted">کد پیگیری</span><b style="direction:ltr">'+o.code+'</b></div>'+
+    '<div class="sumrow"><span class="muted">تاریخ ثبت</span><span>'+fmtDT(o.createdAt)+'</span></div>'+
+    '<div class="sumrow"><span class="muted">مبلغ</span><span class="bold">'+money(o.price)+'</span></div>'+
+    '<div class="sumrow"><span class="muted">روش پرداخت</span><span>'+(o.pay==='wallet'?'👛 کیف پول':o.pay==='online'?'🏦 درگاه اینترنتی':'💵 در محل')+'</span></div>'+
+    (o.melli?'<div class="sumrow"><span class="muted">کد ملی</span><span style="direction:ltr">'+esc(o.melli)+'</span></div>':'')+
+    (o.file?'<div class="sumrow"><span class="muted">پیوست‌ها</span><span style="font-size:12px">📎 '+esc(o.file)+'</span></div>':'')+
+    (o.note?'<div class="sumrow"><span class="muted">توضیحات</span><span style="font-size:12px;max-width:60%;text-align:left">'+esc(o.note)+'</span></div>':'')+'</div>';
+  if(!isAppt&&['submitted','in_review'].includes(o.status)){
+    h+='<div class="row"><button class="btn btn-o" onclick="askCancel(\''+o.id+'\')">❌ لغو سفارش و بازگشت وجه</button><button class="btn btn-o" onclick="toast(\'پشتیبانی ثبتینو: ۰۹۱۲۰۰۰۰۰۰۰ (تماس و واتساپ)\',\'ok\')">☎️ پشتیبانی</button></div>';
+  }
+  if(!isAppt&&o.status==='delivered'){
+    h+='<div class="card" style="background:rgba(217,70,239,.1)"><div class="center"><div style="font-size:30px">🎉</div><div class="bold">این سفارش کامل شد!</div><button class="btn btn-p btn-s mt10" onclick="navTo(\'cards\')">🎴 گرفتن پک کارت هدیه</button></div></div>';
+  }
+  h+='</div>';
+  return h;
+}
+function askCancel(id){
+  modal(sheetHead('لغو سفارش')+'<p style="font-size:13px;margin-bottom:14px">سفارش لغو شود؟ وجه پرداختی به‌صورت خودکار به کیف پول شما بازگردانده می‌شود.</p><div class="row"><button class="btn btn-o" onclick="closeModal()">انصراف</button><button class="btn btn-d" onclick="cancelOrder(\''+id+'\')">بله، لغو کن</button></div>','mid');
+}
+function cancelOrder(id){
+  const o=db.orders.find(x=>x.id===id);if(!o)return;
+  const u=cu();
+  o.status='cancelled';o.tl.push({st:'cancelled',at:Date.now(),note:'انصراف مشتری'});
+  if(o.pay==='wallet'){u.wallet+=o.price;addTx(u,'refund',o.price,'بازگشت وجه سفارش '+o.code+' به کیف پول')}
+  else{addTx(u,'refund',o.price,'درخواست بازگشت وجه درگاه برای '+o.code+' (۲۴ ساعته)')}
+  notify('admin','❌','سفارش '+o.code+' توسط مشتری لغو شد.');
+  save();closeModal();toast('سفارش لغو شد و وجه بازگردانده می‌شود','warn');render();
+}
+
+/* ---------- کیف پول ---------- */
+function bankCardHTML(){
+  const st=db.settings||{cardNo:'',cardHolder:'',cardBank:''};
+  if(!st.cardNo)return '<div class="card"><div class="muted center" style="font-size:12px">💳 هنوز شماره کارت برای دریافت واریز ثبت نشده است — از پرداخت آنلاین استفاده کنید.</div></div>';
+  return '<div class="bankcard"><div class="bk-row"><span>'+esc(st.cardBank||'')+'</span><span>کارت‌به‌کارت</span></div><div class="bk-no">'+fmtCard(st.cardNo)+'</div><div class="bk-h">به نام '+esc(st.cardHolder||'-')+'</div></div>';
+}
+function screenWallet(){
+  const u=cu();
+  const txs=db.txs.filter(t=>t.uid===u.id);
+  let h=pageHeader('کیف پول');
+  h+='<div class="pad">';
+  h+='<div class="wallet-card"><div class="wc-bg">💳</div><div class="wc-l">موجودی کیف پول شما</div><div class="wc-v">'+faNum(u.wallet)+' <span style="font-size:13px;font-weight:600">تومان</span></div><button class="btn" style="background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);width:auto;padding:9px 18px" onclick="openCharge()">＋ شارژ کیف پول</button></div>';
+  h+='<div class="card"><div class="card-t">'+I.card+' واریز کارت‌به‌کارت<div class="sp"></div><button class="more" onclick="openCharge()">شارژ ←</button></div><div style="margin-bottom:0">'+bankCardHTML()+'</div></div>';
+  h+='<div class="card"><div class="card-t">🕘 تاریخچه تراکنش‌ها</div>';
+  if(!txs.length)h+='<div class="empty" style="padding:20px"><div class="e-em">💳</div><div class="e-t">تراکنشی ندارید</div></div>';
+  else h+=txs.slice(0,25).map(t=>{
+    const map={charge:['#ecfdf5','⬆️','شارژ'],payment:['#eef2ff','⬇️','پرداخت'],prize:['#fffbeb','🎡','جایزه'],refund:['#f0fdf4','↩️','بازگشت وجه'],redeem:['#fdf4ff','⭐','تبدیل امتیاز']};
+    const m=map[t.type]||['#f1f5f9','•',''];
+    const plus=t.type==='charge'||t.type==='prize'||t.type==='refund';
+    return '<div class="tx"><div class="t-em" style="background:'+m[0]+'">'+m[1]+'</div><div style="flex:1"><div class="t-n">'+esc(t.note)+'</div><div class="t-d">'+fmtDT(t.at)+'</div></div><div class="t-a '+(plus?'green':(t.amount?'red':'muted'))+'">'+(t.amount?(plus?'+':'−')+faNum(t.amount):'—')+'</div></div>';
+  }).join('');
+  h+='</div></div>';
+  return h;
+}
+function openCharge(){
+  S.chargeSel=S.chargeSel||null;
+  const st=db.settings||{};
+  modal(sheetHead('شارژ کیف پول')+
+    bankCardHTML()+
+    (st.cardNo?'<div class="tiny center mb10">مبلغ را واریز کنید، سپس «واریز کردم» را بزنید</div>':'')+
+    '<div class="grid3">'+[200000,500000,1000000].map(a=>'<button class="chip '+(S.chargeSel===a?'on':'')+'" style="text-align:center" onclick="S.chargeSel='+a+';openCharge()">'+faNum(a/1000)+' هزار</button>').join('')+'</div>'+
+    '<div class="field mt10"><label>مبلغ دلخواه (تومان)</label><input id="chargeAmt" inputmode="numeric" placeholder="مثلاً 750000" style="direction:ltr;text-align:left" oninput="this.value=digitsOnly(this.value)"></div>'+
+    '<button class="btn btn-g" onclick="doChargeCard()">✅ واریز کردم — تأیید کارت‌به‌کارت</button>'+
+    '<button class="btn btn-o mt10" onclick="doChargeGateway()">🏦 پرداخت آنلاین با درگاه</button>'+
+    '<div class="tiny center mt10">در نسخه اصلی، تأیید واریزی توسط مدیر انجام می‌شود؛ در دمو بلافاصله شارژ می‌شود.</div>','mid');
+}
+function chargeAmount(){
+  const a=parseInt(digitsOnly(($('#chargeAmt')?document.getElementById('chargeAmt').value:'')||''));
+  if(a)return a;
+  return S.chargeSel||0;
+}
+function doChargeCard(){
+  const a=chargeAmount();
+  if(!a||a<10000){toast('حداقل مبلغ شارژ ۱۰,۰۰۰ تومان است','err');return}
+  chargeDone(a,'کارت‌به‌کارت');
+}
+function doChargeGateway(){
+  const a=chargeAmount();
+  if(!a||a<10000){toast('حداقل مبلغ شارژ ۱۰,۰۰۰ تومان است','err');return}
+  gatewaySim(a,'chargeDone('+a+',\'درگاه بانکی\')');
+}
+function chargeDone(amount,via){
+  const u=cu();u.wallet+=amount;addTx(u,'charge',amount,'شارژ کیف پول — '+(via||''));
+  notify(u.id,'💳','کیف پول شما به مبلغ '+faNum(amount)+' تومان شارژ شد.');
+  save();closeModal();toast('کیف پول شارژ شد ✅','ok');render();
+}
+
+/* ---------- جوایز و امتیاز ---------- */
+function screenRewards(){
+  const u=cu();
+  let h=pageHeader('جوایز و بازی‌ها');
+  h+='<div class="pad">';
+  h+='<div class="pt-hero"><div class="wc-bg">⭐</div><div class="row"><div><div class="wc-l">امتیاز شما</div><div class="wc-v">'+faNum(u.points)+' <span style="font-size:13px;font-weight:600">امتیاز</span></div></div><div class="sp"></div><div class="center" style="font-size:11px;background:rgba(255,255,255,.18);border-radius:14px;padding:8px 12px">🔥 استریک<br><b style="font-size:16px">'+faNum(u.streak||0)+'</b> روز</div></div></div>';
+  h+='<button class="menu-item" onclick="navTo(\'wheel\')"><div class="m-em" style="background:#fff7ed">🎡</div><div style="flex:1"><div class="m-n">گردونه شانس</div><div class="m-d">هر روز ۱ چرخش رایگان + چرخش اضافه با امتیاز</div></div><span class="chev">'+I.chev+'</span></button>';
+  h+='<button class="menu-item" onclick="navTo(\'cards\')"><div class="m-em" style="background:#fdf2f8">🎴</div><div style="flex:1"><div class="m-n">بازی کارت‌های ثبتینو '+(u.packs?'<span class="bdg2">'+faNum(u.packs)+' پک جدید</span>':'')+'</div><div class="m-d">کارت جمع کن، ست کامل کن، جایزه نقدی بگیر</div></div><span class="chev">'+I.chev+'</span></button>';
+  h+='<div class="sect-t"><span>🛒 فروشگاه امتیاز</span></div>';
+  h+=REDEEMS.map(r=>'<div class="card row" style="padding:12px"><div style="font-size:26px">'+r.emoji+'</div><div style="flex:1"><div class="bold" style="font-size:13px">'+r.title+(r.best?' <span class="stb st-ready" style="font-size:9px">پرفروش‌ترین</span>':'')+'</div><div class="tiny">'+faNum(r.points)+' امتیاز</div></div><button class="btn btn-p btn-s" onclick="doRedeem(\''+r.id+'\')" '+(u.points<r.points?'disabled':'')+'">تبدیل</button></div>').join('');
+  h+='<div class="card"><div class="card-t">🎯 چطور امتیاز بگیرم؟</div><ul class="rules">'+[
+    'ورود روزانه به اپ: <b>+۵ امتیاز</b> (استریک روزانه)',
+    'ثبت هر سفارش: <b>+۱۵ امتیاز</b> + به ازای هر ۱۰ هزار تومان خرید <b>+۱ امتیاز</b>',
+    'رزرو نوبت حضوری: <b>+۱۰ امتیاز</b>',
+    'تحویل سفارش: <b>+۲۰ امتیاز</b> + یک <b>پک کارت هدیه</b>',
+    'دعوت دوستان: هر دعوت <b>+۱۰۰ امتیاز</b> + پک کارت',
+    'گردونه شانس: تا <b>+۱۰۰ امتیاز</b> در هر چرخش'
+  ].map(x=>'<li>'+x+'</li>').join('')+'</ul></div>';
+  h+='</div>';
+  return h;
+}
+function doRedeem(id){
+  const r=REDEEMS.find(x=>x.id===id);const u=cu();
+  if(u.points<r.points){toast('امتیاز کافی ندارید','err');return}
+  modal(sheetHead('تبدیل امتیاز')+'<div class="center"><div style="font-size:44px">'+r.emoji+'</div><div class="bold mt6">'+r.title+'</div><div class="muted mt6">به ازای '+faNum(r.points)+' امتیاز</div><button class="btn btn-p mt14" onclick="confirmRedeem(\''+id+'\')">تأیید تبدیل</button></div>','mid');
+}
+function confirmRedeem(id){
+  const r=REDEEMS.find(x=>x.id===id);const u=cu();
+  if(u.points<r.points){toast('امتیاز کافی ندارید','err');return}
+  u.points-=r.points;u.wallet+=r.credit;
+  addTx(u,'redeem',r.credit,'تبدیل '+faNum(r.points)+' امتیاز به '+r.title);
+  notify(u.id,'⭐',r.title+' با تبدیل امتیاز به کیف پول اضافه شد.');
+  save();closeModal();toast('🎉 '+r.title+' به کیف پول اضافه شد','ok');render();
+}
+
+/* ---------- گردونه شانس ---------- */
+let spinDeg=0;
+function screenWheel(){
+  const u=cu();
+  const today=dayKey(Date.now());
+  const freeLeft=u.lastSpinDay!==today;
+  const bulbs=Array.from({length:16},(_,i)=>'<span style="transform:rotate('+(i*22.5)+'deg) translate(150px)"></span>').join('');
+  const pointer='<svg width="36" height="42" viewBox="0 0 36 42"><defs><linearGradient id="wpg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#b91c1c"/></linearGradient></defs><path d="M18 40 L5 10 Q18 -3 31 10 Z" fill="url(#wpg)" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg>';
+  let h=pageHeader('گردونه شانس 🎡');
+  h+='<div class="pad">';
+  h+='<div class="wheel-wrap"><div class="wheel-bulbs">'+bulbs+'</div><div class="wheel-pointer">'+pointer+'</div>'+
+     '<div class="wheel" id="wheelEl" style="transform:rotate('+spinDeg+'deg)"><div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient('+WHEEL.map((p,i)=>p.color+' '+(i*45)+'deg '+((i+1)*45)+'deg').join(',')+')"></div>'+
+     '<div class="wseps"></div><div class="wheel-deep"></div>'+
+     WHEEL.map((p,i)=>'<div class="wseg"><span style="transform:rotate('+(i*45+22.5)+'deg) translate(0,-98px)">'+p.label+'</span></div>').join('')+'</div>'+
+     '<button class="wheel-hub" id="spinHub" onclick="spinNow()">'+(S.spin?'...':'بچرخان')+'</button></div>';
+  h+='<div class="wheel-hint">'+(freeLeft?'🎁 چرخش رایگان امروز آماده است!':'⏳ چرخش رایگان امروز تمام شد — چرخش بعدی: <b>۳۰۰ امتیاز</b> (امتیاز شما: '+faNum(u.points)+')')+'</div>';
+  h+='<div class="card"><div class="card-t">🏆 جوایز گردونه</div><div class="grid2">'+WHEEL.map(p=>'<div class="row" style="gap:7px"><span style="width:11px;height:11px;border-radius:4px;background:'+p.color+';display:inline-block"></span><span style="font-size:12px;font-weight:700">'+p.label+'</span></div>').join('')+'</div></div>';
+  h+='<div class="card" style="background:var(--soft)"><div class="tiny center">قوانین: هر روز ۱ چرخش رایگان • چرخش اضافه ۳۰۰ امتیاز • جوایز مستقیم به کیف پول یا امتیاز اضافه می‌شوند</div></div>';
+  h+='</div>';
+  return h;
+}
+function spinNow(){
+  if(S.spin)return;
+  const u=cu();
+  const today=dayKey(Date.now());
+  const isFree=u.lastSpinDay!==today;
+  if(!isFree){
+    if(u.points<300){toast('امتیاز کافی ندارید (۳۰۰ امتیاز لازم است)','err');return}
+    u.points-=300;
+  }
+  u.lastSpinDay=today;
+  S.spin=true;
+  const hub=document.getElementById('spinHub');if(hub)hub.disabled=true;
+  const win=pickW(WHEEL,'w');
+  const i=WHEEL.indexOf(win);
+  const target=5*360+(360-(i*45+22.5))+Math.floor(Math.random()*22-11);
+  spinDeg+=target-(spinDeg%360);
+  const el=document.getElementById('wheelEl');
+  el.style.transform='rotate('+spinDeg+'deg)';
+  setTimeout(function(){
+    S.spin=false;
+    if(win.type==='points'){u.points+=win.v;notify(u.id,'🎡','جایزه گردونه: +'+faNum(win.v)+' امتیاز')}
+    else if(win.type==='credit'){u.wallet+=win.v;addTx(u,'prize',win.v,'جایزه گردونه شانس');notify(u.id,'🎡','جایزه گردونه: '+faNum(win.v)+' تومان اعتبار به کیف پول اضافه شد')}
+    save();
+    if(win.type==='none'){
+      modal('<div class="center" style="padding:10px 0"><div style="font-size:52px">😅</div><div class="bold mt6" style="font-size:16px">این‌بار شانست نیامد!</div><div class="muted mt6">فردا دوباره چرخش رایگان داری</div><button class="btn btn-o mt14" onclick="closeModal();render()">باشه</button></div>','mid');
+    }else{
+      modal('<div class="center" style="padding:10px 0"><div style="font-size:52px">🎉</div><div class="bold mt6" style="font-size:17px">تبریک! جایزه شما:</div><div class="mt10" style="font-size:26px;font-weight:900;color:var(--primary)">'+win.label+'</div><div class="muted mt6">'+(win.type==='points'?'امتیاز مستقیم به حساب شما اضافه شد ⭐':'اعتبار مستقیم به کیف پول شما اضافه شد 💳')+'</div><button class="btn btn-p mt14" onclick="closeModal();render()">عالیه!</button></div>','mid');
+    }
+    render();
+    const el2=document.getElementById('wheelEl');
+    if(el2)el2.insertAdjacentHTML('beforeend','<div class="wflash" style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(rgba(255,255,255,.5) '+(i*45)+'deg '+((i+1)*45)+'deg,transparent '+((i+1)*45)+'deg 360deg);animation:wfade 1.5s forwards"></div>');
+  },4600);
+}
+
+/* ---------- بازی کارت‌ها ---------- */
+function screenCards(){
+  const u=cu();
+  let h=pageHeader('بازی کارت‌های ثبتینو 🎴');
+  h+='<div class="pad">';
+  if(u.packs>0){
+    h+='<div class="card" style="background:linear-gradient(130deg,#7c3aed,#d946ef);color:#fff;cursor:pointer" onclick="openPack()"><div class="row"><div style="font-size:38px">🎁</div><div style="flex:1"><div class="bold" style="font-size:15px">'+faNum(u.packs)+' پک کارت بازنشده!</div><div style="font-size:11.5px;opacity:.85">از فعالیت‌ها و سفارش‌هایت گرفته‌ای — برای باز کردن لمسش کن</div></div></div></div>';
+  }
+  h+='<div class="sect-t"><span>🎯 فعالیت‌ها برای گرفتن کارت</span></div>';
+  h+=ACTS.filter(a=>!a.auto).map(a=>{
+    const cnt=u.acts[a.id]||0;
+    const done=a.once?cnt>0:cnt>=3;
+    return '<div class="act '+(done?'done':'')+'"><div class="a-em" style="background:'+a.bg+'">'+a.emoji+'</div><div style="flex:1"><div class="a-n">'+a.name+'</div><div class="a-d">'+a.desc+(a.id==='invite'?' ('+faNum(cnt)+'/۳)':'')+'</div></div>'+
+      (done?'<span class="a-chk">'+I.check+'</span>':'<button class="btn btn-p btn-s" onclick="doActivity(\''+a.id+'\')">انجام</button>')+'</div>';
+  }).join('');
+  h+='<div class="act"><div class="a-em" style="background:#f0f9ff">🛒</div><div style="flex:1"><div class="a-n">خرید پک با امتیاز</div><div class="a-d">۵۰۰ امتیاز = ۱ پک کارت (بدون محدودیت)</div></div><button class="btn btn-p btn-s" onclick="buyPack()" '+(u.points<500?'disabled':'')+'>خرید</button></div>';
+  h+='<div class="sect-t"><span>📘 آلبوم کارت‌ها ('+faNum(u.cards.length)+' از '+faNum(CARDS.length)+')</span></div>';
+  h+=SETS.map(set=>{
+    const setCards=CARDS.filter(c=>c.set===set.id);
+    const owned=setCards.filter(c=>u.cards.some(x=>x.id===c.id)).length;
+    const full=owned===setCards.length;
+    const rewarded=u.setRewards&&u.setRewards[set.id];
+    return '<div class="card"><div class="card-t">'+set.emoji+' '+set.name+'<div class="setbar"><i style="width:'+(owned/setCards.length*100)+'%"></i></div><span class="tiny">'+faNum(owned)+'/'+faNum(setCards.length)+'</span></div>'+
+      (full&&!rewarded?'<div class="center mb10"><button class="btn btn-g btn-s" onclick="claimSet(\''+set.id+'\')">🎁 دریافت جایزه ست کامل!</button></div>':'')+
+      (full&&rewarded?'<div class="center tiny mb10 green">✅ جایزه ست کامل دریافت شد</div>':'')+
+      '<div class="album">'+setCards.map(c=>{
+        const own=u.cards.some(x=>x.id===c.id);
+        return '<button class="ccell rar-'+c.r+' '+(own?'owned':'')+'" onclick="showCard(\''+c.id+'\')"><span class="c-em">'+(own?c.emoji:'❔')+'</span><span>'+(own?c.name:'؟؟؟')+'</span>'+(own?'<span class="c-r">'+RARITY[c.r]+'</span>':'')+'</button>';
+      }).join('')+'</div></div>';
+  }).join('');
+  h+='</div>';
+  return h;
+}
+function showCard(cid){
+  const c=CARDS.find(x=>x.id===cid);const u=cu();
+  const own=u.cards.some(x=>x.id===c.id);
+  modal('<div class="creveal"><div class="bigcard rar-'+c.r+'"><span class="bc-em">'+(own?c.emoji:'❔')+'</span><span class="bc-n">'+(own?c.name:'کارت قفل است')+'</span><span class="bc-r">'+(own?RARITY[c.r]:'با فعالیت‌ها بازش کن')+'</span></div><button class="btn btn-o mt10" onclick="closeModal()">بستن</button></div>','mid');
+}
+function buyPack(){
+  const u=cu();
+  if(u.points<500){toast('حداقل ۵۰۰ امتیاز لازم است','err');return}
+  modal(sheetHead('خرید پک کارت')+'<div class="center"><div style="font-size:44px">🛒</div><div class="bold mt6">۱ پک کارت = ۵۰۰ امتیاز</div><button class="btn btn-p mt14" onclick="buyPackOk()">تأیید و خرید</button></div>','mid');
+}
+function buyPackOk(){const u=cu();if(u.points<500){toast('امتیاز کافی ندارید','err');return}u.points-=500;u.packs++;save();closeModal();toast('پک کارت خریداری شد 🎁','ok');render()}
+function openPack(){
+  const u=cu();
+  if(u.packs<1){toast('پک بازنشده‌ای نداری — با فعالیت‌ها پک بگیر','warn');return}
+  S.pack=null;
+  modal('<div class="center" style="padding:6px 0" onclick="tapPack()"><div class="pack-big">🎁</div><div class="bold mt10" style="font-size:15px">برای باز کردن پک، رویش بزن!</div><div class="tiny mt6">هر پک یک کارت دارد — شانس کارت افسانه‌ای: ۴٪</div></div>','mid');
+}
+function tapPack(){
+  const u=cu();
+  if(u.packs<1)return;
+  u.packs--;
+  const roll=Math.random();
+  let rar='common';
+  let acc=0;
+  for(const[r,w]of[['legendary',.04],['epic',.13],['rare',.25],['common',.58]]){acc+=w;if(roll<acc){rar=r;break}}
+  const pool=CARDS.filter(c=>c.r===rar);
+  const card=pool[Math.floor(Math.random()*pool.length)];
+  const dup=u.cards.some(x=>x.id===card.id);
+  S.pack=card;
+  modal('<div class="creveal"><div class="bigcard rar-'+card.r+'"><span class="bc-em">'+card.emoji+'</span><span class="bc-n">'+card.name+'</span><span class="bc-r">'+RARITY[card.r]+'</span>'+(dup?'<span class="tiny red">تکراری!</span>':'')+'</div><button class="btn btn-p mt10" onclick="collectPack()">افزودن به آلبوم ✔</button></div>','mid');
+}
+function collectPack(){
+  const card=S.pack;if(!card)return;
+  const u=cu();
+  const dup=u.cards.some(x=>x.id===card.id);
+  if(dup){u.points+=20;notify(u.id,'🎴','کارت تکراری «'+card.name+'» به ۲۰ امتیاز تبدیل شد')}
+  else{
+    u.cards.push({id:card.id,at:Date.now()});
+    notify(u.id,'🎴','کارت جدید «'+card.name+'» ('+RARITY[card.r]+') به آلبوم شما اضافه شد!');
+    const setCards=CARDS.filter(c=>c.set===card.set);
+    const ownedAll=setCards.every(c=>u.cards.some(x=>x.id===c.id));
+    if(ownedAll&&!u.setRewards[card.set]){toast('ست کامل شد! جایزه در انتظار شماست 🏆','ok')}
+  }
+  save();S.pack=null;closeModal();render();
+  if(!dup)setTimeout(()=>{const u2=cu();const setCards2=CARDS.filter(c=>c.set===card.set);const full=setCards2.every(c=>u2.cards.some(x=>x.id===c.id));if(full&&!u2.setRewards[card.set]){modal(sheetHead('🏆 ست کامل شد!')+'<div class="center"><div style="font-size:46px">'+SETS.find(s=>s.id===card.set).emoji+'</div><div class="bold mt6">ست «'+SETS.find(s=>s.id===card.set).name+'» کامل شد!</div><div class="muted mt6">جایزه: <b class="green">'+faNum(SETS.find(s=>s.id===card.set).reward.credit)+' تومان</b> + <b class="amber">'+faNum(SETS.find(s=>s.id===card.set).reward.points)+' امتیاز</b></div><button class="btn btn-g mt14" onclick="claimSet(\''+card.set+'\')">دریافت جایزه</button></div>','mid')}},400);
+}
+function claimSet(setId){
+  const set=SETS.find(s=>s.id===setId);const u=cu();
+  const setCards=CARDS.filter(c=>c.set===setId);
+  if(!setCards.every(c=>u.cards.some(x=>x.id===c.id))){toast('ست هنوز کامل نشده','warn');return}
+  if(u.setRewards[setId]){toast('جایزه این ست قبلاً دریافت شده','warn');return}
+  u.setRewards[setId]=true;
+  u.wallet+=set.reward.credit;u.points+=set.reward.points;
+  addTx(u,'prize',set.reward.credit,'جایزه ست کامل کارت‌ها — '+set.name);
+  notify(u.id,'🏆','جایزه ست کامل «'+set.name+'»: '+faNum(set.reward.credit)+' تومان به کیف پول اضافه شد');
+  save();closeModal();toast('🎉 جایزه ست به کیف پول اضافه شد','ok');render();
+}
+
+/* ---------- فعالیت‌ها ---------- */
+function doActivity(id){
+  const a=ACTS.find(x=>x.id===id);const u=cu();
+  const cnt=u.acts[id]||0;
+  if(a.once&&cnt>0){toast('این فعالیت قبلاً انجام شده','warn');return}
+  if(id==='insta'){
+    modal(sheetHead('📸 دنبال‌کردن اینستاگرام')+'<div class="center"><div style="font-size:44px">📸</div><div class="bold mt6">پیج @sabtino.app را فالو کن</div><div class="muted mt6" style="font-size:12px">در دمو، اینستاگرام شبیه‌سازی می‌شود</div><button class="btn btn-p mt14" onclick="finActivity(\'insta\')">✅ فالو کردم</button></div>','mid');
+  }else if(id==='tg'||id==='wa'){
+    const nm=id==='tg'?'تلگرام':'واتساپ';
+    modal(sheetHead((id==='tg'?'✈️':'💬')+' اشتراک‌گذاری در '+nm)+'<div class="card" style="background:var(--soft);font-size:12.5px">اپ خدمات ثبتی و چاپ «ثبتینو» را نصب کن؛ سفارش آنلاین، نوبت‌دهی، گردونه شانس و بازی کارت دارد! 👇<div class="bold mt6" style="direction:ltr;text-align:center;color:var(--primary)">sabtino.app/demo</div></div><div class="row"><button class="btn btn-o" onclick="copyText(\'sabtino.app/demo\')">📋 کپی لینک</button><button class="btn btn-p" onclick="finActivity(\''+id+'\')">✅ به اشتراک گذاشتم</button></div>','mid');
+  }else if(id==='review'){
+    S.stars=0;
+    modal(sheetHead('⭐ ثبت دیدگاه')+'<div class="stars" id="starRow">'+[1,2,3,4,5].map(n=>'<span onclick="pickStar('+n+')">⭐</span>').join('')+'</div><div class="field mt10"><textarea id="revTxt" placeholder="نظرت درباره خدمات ثبتینو چیست؟"></textarea></div><button class="btn btn-p" onclick="finActivity(\'review\')">ثبت دیدگاه (+۳۰ امتیاز و پک کارت)</button>','mid');
+  }else if(id==='invite'){
+    if(cnt>=3){toast('سقف دعوت دمو (۳ بار) پر شده','warn');return}
+    modal(sheetHead('🎁 دعوت دوستان')+'<div class="card center" style="background:var(--soft)"><div class="tiny">کد دعوت شما</div><div class="bold" style="font-size:20px;direction:ltr">'+u.refCode+'</div></div><div class="muted center" style="font-size:12px">با هر دعوت موفق: پک کارت + ۱۰۰ امتیاز</div><div class="row mt10"><button class="btn btn-o" onclick="copyText(\'sabtino.app/demo?ref='+u.refCode+'\')">📋 کپی لینک دعوت</button><button class="btn btn-p" onclick="finActivity(\'invite\')">✅ دعوت ثبت شد</button></div>','mid');
+  }
+}
+function pickStar(n){S.stars=n;$$('#starRow span').forEach((el,i)=>el.classList.toggle('on',i<n))}
+function finActivity(id){
+  const u=cu();
+  if(id==='review'&&!S.stars){toast('لطفاً امتیاز ستاره‌ای انتخاب کنید','err');return}
+  u.acts[id]=(u.acts[id]||0)+1;
+  u.packs++;
+  if(id==='review'){u.points+=30;notify(u.id,'⭐','دیدگاه شما ثبت شد (+۳۰ امتیاز + پک کارت)')}
+  if(id==='invite'){u.points+=100;u.invites=(u.invites||0)+1;notify(u.id,'🎁','دعوت شما ثبت شد (+۱۰۰ امتیاز + پک کارت)')}
+  if(id==='insta'||id==='tg'||id==='wa')notify(u.id,'🎁','فعالیت «'+ACTS.find(a=>a.id===id).name+'» ثبت شد — یک پک کارت گرفتی!');
+  save();closeModal();toast('🎉 پک کارت گرفتی! از بخش کارت‌ها بازش کن','ok');
+  if(id==='review')S.stars=0;
+  render();
+}
+
+/* ---------- اعلان‌ها ---------- */
+function openNotifs(){
+  const u=cu();
+  const list=notifsOf(u.id);
+  modal(sheetHead('🔔 اعلان‌ها')+(list.length?list.map(n=>'<div class="ntf '+(n.read?'':'unread')+'"><div class="n-em">'+n.em+'</div><div style="flex:1"><div class="n-t">'+n.txt+'</div><div class="n-d">'+fmtDT(n.at)+'</div></div>'+(n.read?'':'<span class="ndot"></span>')+'</div>').join(''):'<div class="empty"><div class="e-em">🔔</div><div class="e-t">اعلانی ندارید</div></div>')+'<button class="btn btn-o mt10" onclick="closeModal()">بستن</button>');
+  let changed=false;notifsOf(u.id).forEach(n=>{if(!n.read){n.read=true;changed=true}});
+  if(changed)save();
+  setTimeout(renderTabbar,100);
+}
+
+/* ---------- پروفایل و تنظیمات ---------- */
+function themeCardHTML(){
+  const t=getTheme();
+  return '<div class="card"><div class="card-t">'+I.palette+' ظاهر و تم</div>'+
+  '<div class="set-seg"><button class="'+(t.theme==='light'?'on':'')+'" onclick="setTheme(\'light\')">☀️ روشن</button><button class="'+(t.theme==='dark'?'on':'')+'" onclick="setTheme(\'dark\')">🌙 تاریک</button></div>'+
+  '<div class="swatches">'+[['violet','sw-violet'],['blue','sw-blue'],['green','sw-green'],['orange','sw-orange']].map(a=>'<button class="swatch '+a[1]+(t.accent===a[0]?' on':'')+'" onclick="setTheme(null,\''+a[0]+'\')"></button>').join('')+'</div>'+
+  '<div class="tiny mt10">انتخاب تم روشن یا تاریک + رنگ‌بندی دلخواه — انتخاب شما ذخیره می‌شود</div></div>';
+}
+function screenProfile(){
+  if(isAdmin()){
+    let h=pageHeader('حساب مدیر');
+    h+='<div class="pad"><div class="card center"><div style="font-size:52px">👑</div><div class="bold mt6" style="font-size:16px">مدیر سیستم ثبتینو</div><div class="tiny" style="direction:ltr">admin</div></div>'+
+    themeCardHTML()+
+    '<div class="card"><div class="card-t">🧰 ابزار مدیریت</div>'+
+    '<div class="row" style="flex-wrap:wrap;gap:8px">'+
+    '<button class="btn btn-o btn-s" onclick="cardSettings()">'+I.card+' شماره کارت واریز</button>'+
+    '<button class="btn btn-o btn-s" onclick="showAdminGuide()">📖 راهنمای پنل مدیر</button></div></div>'+
+    '<button class="btn btn-d" onclick="resetDemoConfirm()">↺ ریست داده‌های دمو</button><div style="height:10px"></div><button class="btn btn-p" onclick="logout()">خروج از حساب</button>'+
+    '<div class="tiny center mt14">ثبتینو — نسخه ۱.۲.۰</div></div>';
+    return h;
+  }
+  const u=cu();
+  const st=userStats(u.id);
+  let h=pageHeader('پروفایل');
+  h+='<div class="pad">';
+  h+='<div class="card center"><div class="avatar" style="width:64px;height:64px;font-size:26px;margin:0 auto 8px;background:var(--primary-soft);border-color:var(--border);color:var(--primary)">'+u.name.trim().charAt(0)+'</div><div class="bold" style="font-size:16px">'+esc(u.name)+'</div><div class="tiny" style="direction:ltr">👤 '+esc(u.username||'')+'</div><div class="tiny" style="direction:ltr">'+u.phone+'</div><div class="tiny mt6">عضو ثبتینو از '+fmtDate(u.joined)+' • 🔥 '+faNum(u.streak||0)+' روز متوالی</div></div>';
+  h+='<div class="grid2"><div class="stat"><div class="st-l">🧾 سفارش‌ها</div><div class="st-v">'+faNum(st.cnt)+'</div></div><div class="stat"><div class="st-l">⭐ امتیاز</div><div class="st-v">'+faNum(u.points)+'</div></div><div class="stat"><div class="st-l">🎴 کارت‌ها</div><div class="st-v">'+faNum(u.cards.length)+'/'+faNum(CARDS.length)+'</div></div><div class="stat"><div class="st-l">🎁 دعوت‌ها</div><div class="st-v">'+faNum(u.invites||0)+'</div></div></div>';
+  h+=themeCardHTML();
+  h+='<div class="card"><div class="card-t">🎯 کد دعوت</div><div class="row"><input value="'+(u.refCode||'')+'" disabled style="background:var(--input);border:1.5px solid var(--border);border-radius:12px;padding:9px 12px;flex:1;direction:ltr;text-align:center;font-weight:800"><button class="btn btn-o btn-s" onclick="copyText(\''+(u.refCode||'')+'\')">کپی</button></div><div class="tiny mt6">کد را به دوستانت بده؛ با هر دعوت موفق ۱۰۰ امتیاز + پک کارت بگیر.</div></div>';
+  h+='<div class="card"><div class="card-t">👤 ویرایش اطلاعات</div><div class="field"><label>نام و نام خانوادگی</label><input id="pName" value="'+esc(u.name)+'"></div><button class="btn btn-o btn-s" onclick="saveName()">ذخیره</button><div class="tiny mt6">شماره تماس ('+u.phone+') برای پیگیری سفارش‌ها و هماهنگی پشتیبانی استفاده می‌شود.</div></div>';
+  h+='<div class="card"><div class="card-t">🧰 ابزار دمو</div><div class="row" style="flex-wrap:wrap;gap:8px">'+
+    '<button class="btn btn-o btn-s" onclick="showWelcomeOnce()">📖 راهنمای دمو</button>'+
+    '<button class="btn btn-o btn-s" onclick="toast(\'پشتیبانی ثبتینو: ۰۹۱۲۰۰۰۰۰۰۰\',\'ok\')">☎️ پشتیبانی</button>'+
+    '<button class="btn btn-o btn-s" onclick="if(db.session){db.session={role:\'admin\'};save();S.route=\'adash\';render();}">👑 ورود سریع به پنل مدیر</button>'+
+    '<button class="btn btn-d btn-s" onclick="resetDemoConfirm()">↺ ریست دمو</button></div></div>';
+  h+='<button class="btn btn-p" onclick="logout()">خروج از حساب</button>';
+  h+='<div class="tiny center mt14">ثبتینو — نسخه ۱.۲.۰</div>';
+  h+='</div>';
+  return h;
+}
+function saveName(){
+  const u=cu();const v=($('#pName')?document.getElementById('pName').value.trim():'');
+  if(!v){toast('نام نمی‌تواند خالی باشد','err');return}
+  u.name=v;save();toast('ذخیره شد ✅','ok');render();
+}
+function resetDemoConfirm(){confirmBox('همه داده‌های دمو (سفارش‌ها، امتیازها، کارت‌ها) به حالت اولیه برمی‌گردد. ادامه می‌دهید؟','resetDemo')}
+function resetDemo(){localStorage.removeItem(DB_KEY);localStorage.removeItem('sabtino_theme_v1');location.reload()}
+function showAdminGuide(){
+  modal(sheetHead('📖 راهنمای پنل مدیر')+'<ul class="rules" style="line-height:2.2">'+[
+   '📊 داشبورد: درآمد امروز/ماه، سود کل، نمودار ۷ روز و سهم دسته‌ها',
+   '👥 مشتریان: درآمد و سودِ رسانده‌شده توسط هر مشتری + سهم از کل',
+   '🧾 سفارش‌ها: تغییر وضعیت مراحل ← مشتری همان لحظه در اپ می‌بیند',
+   '📅 نوبت‌ها: تأیید حضور یا لغو نوبت‌های حضوری',
+   '✉️ ارسال پیام مستقیم به هر مشتری از پرونده مشتری',
+   '💳 ثبت شماره کارت واریز از پروفایل مدیر',
+   'تغییر وضعیت به «تحویل شد» به مشتری ۲۰ امتیاز + پک کارت می‌دهد'
+  ].map(x=>'<li>'+x+'</li>').join('')+'</ul><button class="btn btn-p mt10" onclick="closeModal()">فهمیدم</button>','mid');
+}
+/* ================= ADMIN (MANAGER) ================= */
+function aHead(title,extra){
+  return '<div class="page-h"><div class="avatar" style="width:34px;height:34px;font-size:15px;background:linear-gradient(135deg,#4f46e5,#a855f7);color:#fff">👑</div><div class="ttl">'+title+'</div><div class="sp"></div>'+(extra||'')+'</div>';
+}
+function moneyShort(n){
+  if(n>=1000000)return faNum((n/1000000).toFixed(1))+'م';
+  if(n>=1000)return faNum(Math.round(n/1000))+'هـ';
+  return faNum(n);
+}
+function screenAdash(){
+  const today=dayKey(Date.now());
+  const now=new Date();
+  const paid=db.orders.filter(o=>o.status!=='cancelled');
+  const revToday=db.txs.filter(t=>t.type==='payment'&&dayKey(t.at)===today).reduce((s,t)=>s+t.amount,0);
+  const revMonth=db.txs.filter(t=>t.type==='payment'&&new Date(t.at).getMonth()===now.getMonth()&&new Date(t.at).getFullYear()===now.getFullYear()).reduce((s,t)=>s+t.amount,0);
+  const revAll=db.txs.filter(t=>t.type==='payment').reduce((s,t)=>s+t.amount,0);
+  const profitAll=paid.reduce((s,o)=>s+(o.price-o.cost),0);
+  const activeCnt=paid.filter(o=>['submitted','in_review','in_progress'].includes(o.status)).length;
+  const apptNext=db.orders.filter(o=>o.type==='appointment'&&o.status==='booked'&&o.appointDate>=Date.now()-864e5).length;
+  const custCnt=db.users.filter(u=>u.role==='customer').length;
+  const days=custRevenue7();
+  const maxDay=Math.max.apply(null,days.map(d=>d.sum).concat([1]));
+  const wd=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
+  /* سهم دسته‌ها */
+  const catSum={gov:0,copy:0,print:0};
+  paid.forEach(o=>{const s=svc(o.serviceId);if(s)catSum[s.cat]+=o.price});
+  const totCat=catSum.gov+catSum.copy+catSum.print||1;
+  let acc=0;
+  const stops=[];
+  [['gov','#6366f1'],['copy','#10b981'],['print','#f59e0b']].forEach(c=>{const pct=catSum[c[0]]/totCat*100;stops.push(c[1]+' '+acc.toFixed(1)+'% '+(acc+pct).toFixed(1)+'%');acc+=pct});
+  const tops=db.users.filter(u=>u.role==='customer').map(u=>({u:u,st:userStats(u.id)})).sort((a,b)=>b.st.rev-a.st.rev).slice(0,3);
+  let h=aHead('داشبورد مدیریت','<button class="hbell" onclick="logout()">'+I.logout+'</button>');
+  h+='<div class="pad">';
+  h+='<div class="tiny">📅 '+new Date().toLocaleDateString('fa-IR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'</div>';
+  h+='<div class="grid2 mt10">';
+  h+='<div class="stat"><div class="st-l"><span class="ic" style="background:#ecfdf5">💰</span>درآمد امروز</div><div class="st-v green">'+faNum(revToday)+' <small style="font-size:10px">تومان</small></div><div class="st-s muted">'+faNum(db.txs.filter(t=>t.type==='payment'&&dayKey(t.at)===today).length)+' پرداخت امروز</div></div>';
+  h+='<div class="stat"><div class="st-l"><span class="ic" style="background:#eef2ff">📈</span>درآمد این ماه</div><div class="st-v indigo">'+faNum(revMonth)+' <small style="font-size:10px">تومان</small></div><div class="st-s muted">کل درآمد: '+faNum(revAll)+' تومان</div></div>';
+  h+='<div class="stat"><div class="st-l"><span class="ic" style="background:#fffbeb">👑</span>سود کل (درآمد − هزینه)</div><div class="st-v amber">'+faNum(profitAll)+' <small style="font-size:10px">تومان</small></div><div class="st-s muted">حاشیه سود: '+faNum(revAll?Math.round(profitAll/revAll*100):0)+'٪</div></div>';
+  h+='<div class="stat"><div class="st-l"><span class="ic" style="background:#fdf2f8">🧾</span>سفارش در جریان</div><div class="st-v" style="color:#db2777">'+faNum(activeCnt)+'</div><div class="st-s"><button class="more" onclick="S.ordFilter=\'review\';go(\'aorders\')" style="color:#db2777;font-weight:800;font-size:10px">رسیدگی ←</button></div></div>';
+  h+='</div>';
+  h+='<div class="card mt10"><div class="card-t">📊 درآمد ۷ روز اخیر (پرداخت‌های سفارش)</div><div class="bars">';
+  days.forEach(d=>{
+    const hh=Math.max(4,Math.round(d.sum/maxDay*100));
+    const lbl=wd[new Date(d.ts).getDay()];
+    h+='<div class="bar-col"><div class="bar" style="height:'+hh+'%" title="'+faNum(d.sum)+' تومان"><b>'+(d.sum?moneyShort(d.sum):'')+'</b></div></div>';
+  });
+  h+='</div><div class="row" style="gap:7px">';
+  days.forEach(d=>{h+='<div class="bar-lbl" style="flex:1">'+wd[new Date(d.ts).getDay()].slice(0,5)+'</div>'});
+  h+='</div></div>';
+  h+='<div class="card"><div class="card-t">🍩 سهم دسته‌ها از درآمد</div><div class="donut-wrap"><div class="donut" style="background:conic-gradient('+stops.join(',')+')"><div class="donut-c"><b>'+moneyShort(totCat)+'</b><span class="tiny">تومان</span></div></div><div class="legend">'+
+    '<div class="lg"><span class="dot" style="background:#6366f1"></span>خدمات ثبتی — '+faNum(catSum.gov)+' تومان ('+faNum(Math.round(catSum.gov/totCat*100))+'٪)</div>'+
+    '<div class="lg"><span class="dot" style="background:#10b981"></span>کپی — '+faNum(catSum.copy)+' تومان ('+faNum(Math.round(catSum.copy/totCat*100))+'٪)</div>'+
+    '<div class="lg"><span class="dot" style="background:#f59e0b"></span>چاپ و طراحی — '+faNum(catSum.print)+' تومان ('+faNum(Math.round(catSum.print/totCat*100))+'٪)</div></div></div></div>';
+  h+='<div class="card"><div class="card-t">🥇 مشتریان برتر (بیشترین درآمد)</div>'+tops.map((t,i)=>'<div class="custrow" style="box-shadow:none;background:var(--soft);margin-bottom:7px"><div class="rank r'+(i+1)+'">'+faNum(i+1)+'</div><div style="flex:1"><div class="cn">'+esc(t.u.name)+'</div><div class="cp">'+faNum(t.st.cnt)+' سفارش</div></div><div class="cv">'+faNum(t.st.rev)+'<small>سود: '+faNum(t.st.prof)+'</small></div></div>').join('')+'<button class="btn btn-o btn-s mt10" onclick="go(\'acustomers\')">همه مشتریان ←</button></div>';
+  h+='<div class="grid2"><div class="stat"><div class="st-l">👥 مشتریان</div><div class="st-v">'+faNum(custCnt)+'</div></div><div class="stat"><div class="st-l">📅 نوبت‌های پیش‌رو</div><div class="st-v">'+faNum(apptNext)+'</div></div></div>';
+  h+='<div class="card mt10"><div class="card-t">⚙️ تنظیمات دریافت واریز</div><div class="muted" style="font-size:12px">'+((db.settings&&db.settings.cardNo)?'کارت فعال: '+fmtCard(db.settings.cardNo)+' — '+esc(db.settings.cardBank||''):'هنوز شماره کارتی ثبت نشده؛ مشتری‌ها نمی‌توانند کارت‌به‌کارت کنند')+'</div><button class="btn btn-o btn-s mt10" onclick="cardSettings()">💳 ثبت / ویرایش شماره کارت</button></div>';
+  h+='</div>';
+  return h;
+}
+let acustBack='adash';
+function screenAOrders(){
+  const filters=[['all','همه'],['review','نیاز به بررسی'],['in_progress','در حال انجام'],['ready','آماده تحویل'],['delivered','تحویل‌شده'],['cancelled','لغوشده']];
+  const os=db.orders.filter(o=>o.type==='order').filter(o=>{
+    if(S.ordFilter==='all')return true;
+    if(S.ordFilter==='review')return['submitted','in_review'].includes(o.status);
+    return o.status===S.ordFilter;
+  }).sort((a,b)=>b.createdAt-a.createdAt);
+  let h=aHead('مدیریت سفارش‌ها');
+  h+='<div class="pad">';
+  h+='<div class="chips">'+filters.map(f=>'<button class="chip '+(S.ordFilter===f[0]?'on':'')+'" onclick="S.ordFilter=\''+f[0]+'\';render()">'+f[1]+'</button>').join('')+'</div>';
+  if(!os.length)h+='<div class="empty"><div class="e-em">🫙</div><div class="e-t">سفارشی در این وضعیت نیست</div></div>';
+  h+=os.map(o=>{
+    const s=svc(o.serviceId);const u=user(o.customerId);
+    return '<button class="ord" onclick="orderDetailAdmin(\''+o.id+'\')" style="width:100%;text-align:right">'+
+    '<div class="o-em">'+s.emoji+'</div><div style="flex:1;min-width:0"><div class="o-n">'+s.name+'</div><div class="o-m">'+(u?esc(u.name):'؟')+' • '+o.code+' • '+fmtDate(o.createdAt)+'</div></div>'+
+    '<div style="text-align:left"><span class="stb st-'+o.status+'">'+ST_LABEL[o.status]+'</span><div class="tiny mt6">'+faNum(o.price)+' ت • سود '+faNum(o.price-o.cost)+'</div></div></button>';
+  }).join('');
+  h+='</div>';
+  return h;
+}
+function orderDetailAdmin(id){
+  const o=db.orders.find(x=>x.id===id);if(!o)return;
+  const s=svc(o.serviceId);const u=user(o.customerId);
+  const idx=STEPS.indexOf(o.status);
+  const next=STEPS[idx+1];
+  modal(sheetHead('سفارش '+o.code)+
+    '<div class="row" style="margin-bottom:10px"><div class="o-em" style="width:42px;height:42px;font-size:20px;background:var(--primary-soft);border-radius:12px;display:flex;align-items:center;justify-content:center">'+s.emoji+'</div><div><div class="bold">'+s.name+'</div><div class="tiny">'+(u?esc(u.name)+' • '+u.phone:'')+'</div></div><div class="sp"></div><span class="stb st-'+o.status+'">'+ST_LABEL[o.status]+'</span></div>'+
+    '<div class="sumbox" style="margin-bottom:10px">'+
+    '<div class="sumrow"><span class="muted">درآمد</span><span class="bold indigo">'+money(o.price)+'</span></div>'+
+    '<div class="sumrow"><span class="muted">هزینه تمام‌شده</span><span class="red">−'+money(o.cost)+'</span></div>'+
+    '<div class="sumrow"><span class="muted">سود این سفارش</span><span class="bold green">'+money(o.price-o.cost)+'</span></div>'+
+    '<div class="sumrow"><span class="muted">پرداخت</span><span>'+(o.pay==='wallet'?'کیف پول':o.pay==='online'?'درگاه':'در محل')+'</span></div>'+
+    (o.melli?'<div class="sumrow"><span class="muted">کد ملی</span><span style="direction:ltr">'+esc(o.melli)+'</span></div>':'')+
+    (o.file?'<div class="sumrow"><span class="muted">پیوست‌های مشتری</span><span style="font-size:11.5px">📎 '+esc(o.file)+'</span></div>':'')+
+    (o.note?'<div class="sumrow"><span class="muted">توضیح</span><span style="font-size:11.5px">'+esc(o.note)+'</span></div>':'')+'</div>'+
+    '<div class="tiny" style="margin-bottom:6px">مراحل:</div><div class="tl">'+o.tl.map(t=>'<div class="tl-item done"><span class="tl-dot"></span><div class="t-n">'+(ST_LABEL[t.st]||t.st)+'</div><div class="t-d">'+fmtDT(t.at)+(t.note?' — '+esc(t.note):'')+'</div></div>').join('')+'</div>'+
+    (next?'<button class="btn btn-p mt10" onclick="advanceOrder(\''+o.id+'\')">➡️ ثبت مرحله بعد: «'+STEP_LABEL[next]+'»</button>':'')+
+    (!['cancelled','delivered'].includes(o.status)?'<button class="btn btn-d mt10" onclick="adminCancel(\''+o.id+'\')">❌ لغو سفارش</button>':'')+
+    '<button class="btn btn-o mt10" onclick="closeModal()">بستن</button>');
+}
+function advanceOrder(id){
+  const o=db.orders.find(x=>x.id===id);if(!o)return;
+  const idx=STEPS.indexOf(o.status);const next=STEPS[idx+1];if(!next)return;
+  const u=user(o.customerId);
+  o.status=next;o.tl.push({st:next,at:Date.now()});
+  if(u){
+    if(next==='delivered'){u.points+=20;u.packs=(u.packs||0)+1;notify(u.id,'🎉','سفارش '+o.code+' تحویل شد! +۲۰ امتیاز و ۱ پک کارت هدیه')}
+    else notify(u.id,'🔄','وضعیت سفارش '+o.code+' به «'+STEP_LABEL[next]+'» تغییر کرد');
+  }
+  save();closeModal();toast('وضعیت به «'+STEP_LABEL[next]+'» تغییر کرد — مشتری مطلع شد','ok');render();
+}
+function adminCancel(id){
+  const o=db.orders.find(x=>x.id===id);if(!o)return;
+  const u=user(o.customerId);
+  o.status='cancelled';o.tl.push({st:'cancelled',at:Date.now(),note:'لغو توسط مدیر'});
+  if(u){if(o.pay==='wallet'){u.wallet+=o.price;addTx(u,'refund',o.price,'بازگشت وجه سفارش '+o.code)}notify(u.id,'❌','سفارش '+o.code+' لغو شد'+(o.pay==='wallet'?' و وجه به کیف پول بازگشت':''))}
+  save();closeModal();toast('سفارش لغو شد','warn');render();
+}
+function screenACustomers(){
+  const q=(S.aq||'').trim();
+  let rows=db.users.filter(u=>u.role==='customer').map(u=>({u:u,st:userStats(u.id)}));
+  if(q)rows=rows.filter(r=>r.u.name.includes(q)||r.u.phone.includes(q));
+  rows.sort((a,b)=>b.st.rev-a.st.rev);
+  const totRev=rows.reduce((s,r)=>s+r.st.rev,0)||1;
+  let h=aHead('مشتریان و درآمد');
+  h+='<div class="pad">';
+  h+='<div class="search" style="margin-top:0">'+I.search+'<input placeholder="جستجوی نام یا شماره..." value="'+esc(S.aq||'')+'" oninput="S.aq=this.value;renderACustList()"></div>';
+  h+='<div class="card row" style="background:linear-gradient(130deg,#312e81,#4f46e5);color:#fff;border:none"><div><div class="tiny" style="opacity:.8">مجموع درآمد از '+faNum(rows.length)+' مشتری</div><div class="bold" style="font-size:18px">'+faNum(rows.reduce((s,r)=>s+r.st.rev,0))+' تومان</div></div><div class="sp"></div><div class="center"><div class="tiny" style="opacity:.8">مجموع سود</div><div class="bold" style="font-size:16px">'+faNum(rows.reduce((s,r)=>s+r.st.prof,0))+' تومان</div></div></div>';
+  h+='<div id="acustList">'+acustListHTML(rows,totRev)+'</div>';
+  h+='</div>';
+  return h;
+}
+function renderACustList(){
+  const q=(S.aq||'').trim();
+  let rows=db.users.filter(u=>u.role==='customer').map(u=>({u:u,st:userStats(u.id)}));
+  if(q)rows=rows.filter(r=>r.u.name.includes(q)||r.u.phone.includes(q));
+  rows.sort((a,b)=>b.st.rev-a.st.rev);
+  const el=document.getElementById('acustList');
+  if(el)el.innerHTML=acustListHTML(rows,rows.reduce((s,r)=>s+r.st.rev,0)||1);
+}
+function acustListHTML(rows,totRev){
+  if(!rows.length)return '<div class="empty"><div class="e-em">🔍</div><div class="e-t">مشتری پیدا نشد</div></div>';
+  return rows.map((r,i)=>{
+    const share=Math.round(r.st.rev/totRev*100);
+    return '<button class="custrow" style="width:100%;text-align:right" onclick="go(\'acustdetail\',{id:\''+r.u.id+'\'})">'+
+    '<div class="rank '+(i<3?'r'+(i+1):'')+'">'+faNum(i+1)+'</div>'+
+    '<div style="flex:1;min-width:0"><div class="cn">'+esc(r.u.name)+'</div><div class="cp" style="direction:ltr;text-align:right">'+r.u.phone+' • '+faNum(r.st.cnt)+' سفارش • سهم '+faNum(share)+'٪</div></div>'+
+    '<div class="cv">'+faNum(r.st.rev)+' <small style="font-size:9px">تومان</small><small>سود: '+faNum(r.st.prof)+'</small></div></button>';
+  }).join('');
+}
+function screenACust(){
+  const u=user(S.params.id);if(!u)return aHead('مشتری')+'<div class="pad"><div class="empty">یافت نشد</div></div>';
+  const st=userStats(u.id);
+  const os=ordersOf(u.id).sort((a,b)=>b.createdAt-a.createdAt);
+  acustBack='acustomers';
+  let h=pageHeader('پرونده مشتری');
+  h+='<div class="pad">';
+  h+='<div class="card center"><div class="avatar" style="width:58px;height:58px;font-size:24px;margin:0 auto 8px;background:var(--primary-soft);color:var(--primary);border-color:var(--border)">'+u.name.trim().charAt(0)+'</div><div class="bold" style="font-size:16px">'+esc(u.name)+'</div><div class="tiny" style="direction:ltr">'+u.phone+'</div><div class="tiny mt6">عضویت از '+fmtDate(u.joined)+' • امتیاز: '+faNum(u.points)+' • کارت: '+faNum(u.cards.length)+'</div>'+
+  '<button class="btn btn-p btn-s mt10" onclick="sendMsgTo(\''+u.id+'\')">✉️ ارسال پیام به این مشتری</button></div>';
+  h+='<div class="grid2"><div class="stat"><div class="st-l">💰 درآمد رسانده</div><div class="st-v indigo">'+faNum(st.rev)+' <small style="font-size:10px">تومان</small></div></div><div class="stat"><div class="st-l">👑 سود رسانده</div><div class="st-v amber">'+faNum(st.prof)+' <small style="font-size:10px">تومان</small></div></div></div>';
+  h+='<div class="card mt10"><div class="card-t">🧾 سفارش‌های '+esc(u.name)+'</div>'+os.map(o=>{
+    const s=svc(o.serviceId);
+    return '<div class="tx"><div class="t-em" style="background:var(--primary-soft)">'+s.emoji+'</div><div style="flex:1"><div class="t-n">'+s.name+' <span class="stb st-'+o.status+'" style="font-size:9px">'+ST_LABEL[o.status]+'</span></div><div class="t-d">'+o.code+' • '+fmtDate(o.createdAt)+(o.type==='appointment'?' • نوبت '+fmtDate(o.appointDate)+' '+faD(o.slot):'')+'</div></div><div class="t-a">'+faNum(o.price)+'<div class="tiny green">سود '+faNum(o.price-o.cost)+'</div></div></div>';
+  }).join('')+'</div>';
+  h+='<div class="card"><div class="card-t">🎴 کارت‌های جمع‌آوری‌شده</div><div class="row" style="flex-wrap:wrap;gap:6px">'+(u.cards.length?u.cards.map(c=>{const card=CARDS.find(x=>x.id===c.id);return '<span class="stb" style="background:var(--soft);color:var(--text)">'+card.emoji+' '+card.name+'</span>'}).join(''):'<span class="tiny">هنوز کارتی جمع نکرده</span>')+'</div></div>';
+  h+='<button class="btn btn-o" onclick="go(\'acustomers\')">← بازگشت به مشتریان</button>';
+  h+='</div>';
+  return h;
+}
+function screenAPpts(){
+  const aps=db.orders.filter(o=>o.type==='appointment');
+  const upcoming=aps.filter(o=>o.status==='booked').sort((a,b)=>(a.appointDate||0)-(b.appointDate||0));
+  const past=aps.filter(o=>o.status!=='booked').sort((a,b)=>(b.appointDate||0)-(a.appointDate||0));
+  let h=aHead('مدیریت نوبت‌ها');
+  h+='<div class="pad">';
+  h+='<div class="sect-t"><span>🕐 نوبت‌های پیش‌رو ('+faNum(upcoming.length)+')</span></div>';
+  if(!upcoming.length)h+='<div class="empty" style="padding:24px"><div class="e-em">📅</div><div class="e-t">نوبت پیش‌رویی وجود ندارد</div></div>';
+  h+=upcoming.map(o=>{
+    const s=svc(o.serviceId);const u=user(o.customerId);
+    return '<div class="card"><div class="row"><div class="o-em">'+s.emoji+'</div><div style="flex:1"><div class="bold" style="font-size:13.5px">'+s.name+'</div><div class="tiny">'+(u?esc(u.name)+' — ':'')+fmtDate(o.appointDate)+' • ساعت '+faD(o.slot)+' • '+o.code+'</div></div><span class="stb st-booked">رزرو شده</span></div>'+
+    '<div class="row mt10"><button class="btn btn-g btn-s" onclick="markAttended(\''+o.id+'\')">✅ حضور ثبت شد</button><button class="btn btn-d btn-s" onclick="cancelAppt(\''+o.id+'\')">لغو نوبت</button><button class="btn btn-o btn-s" onclick="toast(\'تماس با '+ (u?esc(u.phone):'') +'\',\'ok\')">☎️ تماس</button></div></div>';
+  }).join('');
+  h+='<div class="sect-t"><span>📁 بایگانی نوبت‌ها</span></div>';
+  h+=past.map(o=>{
+    const s=svc(o.serviceId);const u=user(o.customerId);
+    return '<div class="tx"><div class="t-em" style="background:var(--soft)">'+s.emoji+'</div><div style="flex:1"><div class="t-n">'+s.name+'</div><div class="t-d">'+(u?esc(u.name)+' — ':'')+fmtDate(o.appointDate)+' • '+faD(o.slot)+'</div></div><span class="stb st-'+o.status+'">'+ST_LABEL[o.status]+'</span></div>';
+  }).join('');
+  h+='</div>';
+  return h;
+}
+function markAttended(id){
+  const o=db.orders.find(x=>x.id===id);if(!o)return;
+  const u=user(o.customerId);
+  o.status='attended';o.tl.push({st:'attended',at:Date.now()});
+  if(u){u.points+=10;notify(u.id,'✅','حضور شما برای نوبت '+fmtDate(o.appointDate)+' ثبت شد (+۱۰ امتیاز)')}
+  save();toast('حضور ثبت شد — مشتری +۱۰ امتیاز گرفت','ok');render();
+}
+function cancelAppt(id){
+  const o=db.orders.find(x=>x.id===id);if(!o)return;
+  const u=user(o.customerId);
+  o.status='cancelled';o.tl.push({st:'cancelled',at:Date.now(),note:'لغو توسط مدیر'});
+  if(u)notify(u.id,'❌','نوبت شما در '+fmtDate(o.appointDate)+' لغو شد. برای رزرو مجدد تماس بگیرید.');
+  save();toast('نوبت لغو شد','warn');render();
+}
+
+/* ---------- پیام مدیر به مشتری ---------- */
+function sendMsgTo(uid_){
+  const u=user(uid_);if(!u)return;
+  S.msgIcon=S.msgIcon||'💌';
+  const icons=['💌','📞','📢','⚠️','✅','🎉'];
+  modal(sheetHead('✉️ ارسال پیام به '+esc(u.name))+
+    '<div class="tiny mb10">این پیام بلافاصله به‌صورت اعلان در اپ مشتری نمایش داده می‌شود.</div>'+
+    '<div class="row" style="gap:8px;margin-bottom:10px">'+icons.map(ic=>'<button class="msg-ico '+(S.msgIcon===ic?'on':'')+'" onclick="S.msgIcon=\''+ic+'\';sendMsgTo(\''+uid_+'\')">'+ic+'</button>').join('')+'</div>'+
+    '<div class="field"><textarea id="msgTxt" placeholder="متن پیام... مثلاً: مدارک شما تأیید شد و سفارش در حال انجام است."></textarea></div>'+
+    '<button class="btn btn-p" onclick="sendMsgNow(\''+uid_+'\')">'+I.send+' ارسال پیام</button>','mid');
+}
+function sendMsgNow(uid_){
+  const txt=($('#msgTxt')?document.getElementById('msgTxt').value.trim():'');
+  if(!txt){toast('متن پیام را بنویسید','err');return}
+  const u=user(uid_);
+  notify(uid_,S.msgIcon||'💌',txt);
+  save();closeModal();
+  toast('پیام برای '+u.name+' ارسال شد ✅','ok');
+  render();
+}
+/* ---------- شماره کارت واریز ---------- */
+function cardSettings(){
+  const st=db.settings||{cardNo:'',cardHolder:'',cardBank:''};
+  modal(sheetHead('💳 شماره کارت دریافت واریز')+
+    '<div class="tiny mb10">این کارت در بخش شارژ کیف پول مشتری‌ها نمایش داده می‌شود (کارت‌به‌کارت).</div>'+
+    '<div class="field"><label>شماره کارت (فقط عدد، ۱۶ تا ۲۴ رقم)</label><input id="cardNo" inputmode="numeric" value="'+esc(st.cardNo||'')+'" style="direction:ltr;text-align:left" oninput="this.value=digitsOnly(this.value).slice(0,24)" placeholder="6219861012345678"></div>'+
+    '<div class="field"><label>به نام</label><input id="cardHolder" value="'+esc(st.cardHolder||'')+'" placeholder="مثلاً: مدیریت ثبتینو"></div>'+
+    '<div class="field"><label>نام بانک</label><input id="cardBank" value="'+esc(st.cardBank||'')+'" placeholder="مثلاً: بانک سامان"></div>'+
+    '<button class="btn btn-p" onclick="cardSave()">ذخیره شماره کارت</button>','mid');
+}
+function cardSave(){
+  const no=digitsOnly(($('#cardNo')?document.getElementById('cardNo').value:'')||'');
+  const holder=($('#cardHolder')?document.getElementById('cardHolder').value.trim():'');
+  const bank=($('#cardBank')?document.getElementById('cardBank').value.trim():'');
+  if(!no||no.length<16||no.length>24){toast('شماره کارت باید ۱۶ تا ۲۴ رقم عدد باشد','err');return}
+  if(!holder){toast('نام صاحب کارت را وارد کنید','err');return}
+  db.settings={cardNo:no,cardHolder:holder,cardBank:bank||'—'};
+  save();closeModal();toast('شماره کارت ذخیره شد ✅','ok');render();
+}
+
+/* ================= INIT ================= */
+function init(){
+  applyTheme();
+  db=load();
+  if(!db||!db.users||!db.orders){db=seedDB();save()}
+  if(!db.settings)db.settings={cardNo:'',cardHolder:'',cardBank:''};
+  if(db.session&&db.session.role==='admin'){S.route='adash'}
+  else if(db.session&&db.session.role==='customer'){if(cu()){dailyBonus(cu());S.route='home'}else{db.session=null;S.route='login'}}
+  else S.route='login';
+  render();
+}
+init();
+</script></body></html>
